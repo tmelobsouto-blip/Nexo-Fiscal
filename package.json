@@ -8,7 +8,9 @@
     "render:mockup": "remotion render src/index.ts StoryMockup out/v01-story-mockup.mp4",
     "render:clean": "remotion render src/index.ts StoryClean out/v01-story-clean.mp4",
     "reel796:beats": "python3 -I scripts/beats_json.py reels/tema796/script.txt src/carousel01/beats.json --target 30",
-    "reel796:render": "remotion render src/index.ts Reel796-Clean out/carousel01/reel-tema796-Clean.mp4"
+    "reel796:render": "remotion render src/index.ts Reel796-Clean out/carousel01/reel-tema796-Clean.mp4",
+    "test": "remotion still src/index.ts DS-T796-04-exemplo out/test/smoke.png",
+    "validate": "npm run typecheck && npm run test"
   },
   "dependencies": {
     "@fontsource/archivo-black": "5.3.0",

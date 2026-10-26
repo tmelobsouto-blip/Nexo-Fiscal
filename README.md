@@ -76,6 +76,15 @@ Se o Chrome do Remotion não baixar no seu ambiente, aponte para um Chromium loc
 | `Reel796-Clean`, `Reel796-Mockup` | Reel Tema 796 (~28 s) |
 | `C01-Slide1` … `C01-Slide4`, `SV31-Slide2` | Carrossel #01 original recriado |
 
+## Claude Code
+
+O projeto vem configurado para o Claude Code:
+
+- `CLAUDE.md`: regras de marca, de precisão técnica e de verificação.
+- `.claude/hooks/session-start.sh`: em sessões na nuvem, instala as dependências e aponta o Remotion para o Chromium do container.
+- `.claude/skills/`: `nexo-post` (fluxo de peça nova), pacote `ig-*`, `grill-me`/`grilling`, `karpathy-guidelines` e `caveman`. Origem e licenças em `.claude/skills/THIRD_PARTY.md`.
+- Testes: `npm run validate` (typecheck + render de uma peça).
+
 ## Antes de publicar
 
 Confira a seção **9. Validar antes de postar** em [`docs/design-system.md`](docs/design-system.md): status do Tema 1.348 no STF, a fonte do dado “70% dos candidatos” e a contagem 272 × 273 questões inéditas.

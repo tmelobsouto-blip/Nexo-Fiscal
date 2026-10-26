@@ -11,6 +11,10 @@ import sys
 import unicodedata
 
 
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DEFAULT_BEATS = os.path.join(REPO, ".claude", "skills", "ig-reel", "beats.py")
+
+
 def strip_accents(text: str) -> str:
     text = text.replace("º", "o").replace("ª", "a")
     return "".join(c for c in unicodedata.normalize("NFKD", text) if not unicodedata.combining(c))
@@ -22,7 +26,7 @@ def main() -> None:
     ap.add_argument("out")
     ap.add_argument("--target", type=float, default=30)
     ap.add_argument("--wpm", type=float, default=165)
-    ap.add_argument("--beats", default=os.path.expanduser("~/.claude/skills/ig-reel/beats.py"))
+    ap.add_argument("--beats", default=DEFAULT_BEATS)
     args = ap.parse_args()
 
     lines = [l.strip() for l in open(args.script, encoding="utf-8") if l.strip()]
