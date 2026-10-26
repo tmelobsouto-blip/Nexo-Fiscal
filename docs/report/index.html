@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sistema Visual NEXO Fiscal</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Mono:wght@400;500;600;700&family=Source+Serif+4:wght@400;500;600&display=swap">
+<style>
+/* Layout: single editorial column (max 1120px) with full-width galleries; brand rules and mono labels as section signage. */
+:root {
+  --bg: #F8F9F6; --fg: #0B110E; --sub: #55645C; --rule: #D8E1DA; --surface: #EDF3EE;
+  --accent: #176B49; --accent-2: #36CD89; --alert: #B4441A; --card: #FFFFFF; --invert-bg: #0B110E; --invert-fg: #FFFFFF;
+  --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'Noto Sans Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --law: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0B110E; --fg: #EEF3EF; --sub: #93A39A; --rule: #26332C; --surface: #141C18;
+  --accent: #36CD89; --accent-2: #36CD89; --alert: #E9875F; --card: #111814; --invert-bg: #EDF3EE; --invert-fg: #0B110E; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #0B110E; --fg: #EEF3EF; --sub: #93A39A; --rule: #26332C; --surface: #141C18;
+  --accent: #36CD89; --accent-2: #36CD89; --alert: #E9875F; --card: #111814; --invert-bg: #EDF3EE; --invert-fg: #0B110E; color-scheme: dark }
+
+* { box-sizing: border-box }
+body { background: var(--bg); color: var(--fg); font-family: var(--sans); font-size: 17px; line-height: 1.55; margin: 0;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 0 64px }
+.wrap { max-width: 1120px; margin: 0 auto }
+a { color: var(--accent) }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--accent-2); outline-offset: 2px }
+h1, h2, h3 { text-wrap: balance; margin: 0; letter-spacing: -0.035em }
+h1 { font-size: clamp(40px, 7vw, 84px); font-weight: 900; line-height: 0.95 }
+h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 800; line-height: 1.05 }
+h3 { font-size: 21px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2 }
+p { margin: 0; max-width: 68ch }
+.label { font-family: var(--mono); font-size: 12.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sub) }
+.label.accent { color: var(--accent) }
+.hl { color: var(--accent) }
+
+header.top { padding-block: 40px 28px; border-bottom: 3px solid var(--fg); display: grid; gap: 22px }
+.progress { height: 3px; background: var(--rule); position: relative }
+.progress::after { content: ""; position: absolute; inset: 0 auto 0 0; width: 34%; background: var(--accent) }
+.thesis { font-size: clamp(19px, 2.2vw, 23px); font-weight: 600; letter-spacing: -0.01em; color: var(--sub); max-width: 60ch }
+nav.toc { display: flex; flex-wrap: wrap; gap: 8px 20px; padding-block: 18px; border-bottom: 1px solid var(--rule) }
+nav.toc a { font-family: var(--mono); font-size: 13px; letter-spacing: 0.06em; text-decoration: none; color: var(--fg) }
+nav.toc a span { color: var(--accent); margin-right: 6px }
+
+section { padding-block: 56px 8px; display: grid; gap: 26px }
+section > .head { display: grid; gap: 12px; border-top: 3px solid var(--fg); padding-top: 18px }
+.cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px 32px }
+.cols > * { min-width: 0 }
+.note { border-left: 5px solid var(--accent); background: var(--surface); padding: 16px 20px; display: grid; gap: 6px }
+.note.warn { border-left-color: var(--alert) }
+
+table { border-collapse: collapse; width: 100%; font-size: 15px }
+.tbl { overflow-x: auto; border-top: 3px solid var(--fg) }
+th, td { text-align: left; padding: 12px 14px 12px 0; border-bottom: 1px solid var(--rule); vertical-align: top }
+th { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sub); font-weight: 600 }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; padding-right: 0; padding-left: 10px; white-space: nowrap }
+td .tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; border: 1.5px solid currentColor; border-radius: 3px; padding: 2px 6px; white-space: nowrap }
+
+.swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px }
+.sw { border: 1px solid var(--rule); background: var(--card) }
+.sw i { display: block; height: 76px }
+.sw div { padding: 10px 12px; display: grid; gap: 2px }
+.sw b { font-size: 14px }
+.sw code { font-family: var(--mono); font-size: 12px; color: var(--sub) }
+.ratio { display: flex; height: 26px; border: 1px solid var(--rule) }
+.ratio i { display: block }
+
+.typescale { display: grid; gap: 0; border-top: 3px solid var(--fg) }
+.ts { display: grid; grid-template-columns: 150px 1fr; gap: 16px; align-items: baseline; padding-block: 12px; border-bottom: 1px solid var(--rule) }
+.ts > * { min-width: 0 }
+.ts .sample { overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
+
+.gallery { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)) }
+.gallery.story { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)) }
+figure { margin: 0; display: grid; gap: 8px; align-content: start }
+figure img, figure video { width: 100%; height: auto; display: block; border: 1px solid var(--rule); background: #0B110E }
+figcaption { display: grid; gap: 3px }
+figcaption b { font-size: 14.5px; letter-spacing: -0.01em }
+figcaption span { font-size: 13.5px; color: var(--sub); line-height: 1.4 }
+
+.ba { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px }
+.ba figure:first-child img { filter: grayscale(0.15) }
+.chip { display: inline-block; font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; background: var(--surface); color: var(--accent) }
+.chip.alert { color: var(--alert) }
+
+ol.steps, ul.clean { margin: 0; padding: 0; list-style: none; display: grid; gap: 0; border-top: 1px solid var(--rule) }
+ol.steps li, ul.clean li { padding: 12px 0; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: 44px 1fr; gap: 12px }
+ul.clean li { grid-template-columns: 1fr }
+ol.steps li > span { font-family: var(--mono); font-weight: 700; color: var(--accent) }
+code.path { font-family: var(--mono); font-size: 13.5px; background: var(--surface); padding: 1px 6px; border-radius: 3px; word-break: break-all }
+.score { font-weight: 800 }
+.score.low { color: var(--alert) }
+footer.end { margin-top: 56px; border-top: 3px solid var(--fg); padding-top: 18px; color: var(--sub); font-size: 14px }
+@media (max-width: 520px) { .ts { grid-template-columns: 1fr; gap: 4px } }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto } }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="progress" aria-hidden="true"></div>
+    <div class="label accent">NEXO Fiscal · Sistema visual para Instagram · Tema 796 como caso-piloto</div>
+    <h1>Lei seca à esquerda.<br><span class="hl">Tradução direta</span> à direita.</h1>
+    <p class="thesis">O DNA que já existia nos seus posts virou regra de sistema: o texto literal tem cara de documento, a tradução tem cara de voz da marca, e todo slide responde a uma pergunta de prova.</p>
+  </header>
+
+  <nav class="toc" aria-label="Seções">
+    <a href="#diagnostico"><span>01</span>Diagnóstico</a>
+    <a href="#direcao"><span>02</span>Direção de arte</a>
+    <a href="#biblioteca"><span>03</span>Biblioteca</a>
+    <a href="#carrossel"><span>04</span>Carrossel Tema 796</a>
+    <a href="#stories"><span>05</span>Stories</a>
+    <a href="#modelos"><span>06</span>Demais modelos</a>
+    <a href="#copy"><span>07</span>Copy e testes A/B</a>
+    <a href="#qualidade"><span>08</span>Qualidade</a>
+    <a href="#validar"><span>09</span>Validar antes de postar</a>
+    <a href="#arquivos"><span>10</span>Arquivos</a>
+  </nav>
+
+  <section id="diagnostico">
+    <div class="head"><span class="label accent">01 · Diagnóstico dos anexos</span><h2>O que é marca e o que é ruído</h2></div>
+    <p>Fontes analisadas: Carrossel #01 (Tema 796, 4 slides), slide 02 da SV 31, os stories V01–V03 (Desafio ITBI, decadência, metodologia) e a recriação fiel dos slides 01 e 02.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Elemento</th><th>O que os anexos fazem</th><th>Decisão no sistema</th></tr></thead>
+      <tbody>
+        <tr><td><b>Paleta</b></td><td>Fundo editorial claro, preto institucional, verde escuro em rótulos e destaques, verde vivo sobre o preto. Laranja-terracota aparece só em “ITBI?” e “Incide ITBI”.</td><td>Mantida. Terracota vira cor <b>semântica</b> (incidência, erro, pegadinha) e nunca decorativa.</td></tr>
+        <tr><td><b>Tipografia</b></td><td>Sans pesada nos títulos, serifada no texto literal, mono em metadados.</td><td>Inter 800–900 com tracking negativo; Noto Sans Mono em rótulos, numeração e fontes. A serifada fica <b>só</b> no texto literal de lei e tese (contraste lei × tradução).</td></tr>
+        <tr><td><b>Grid</b></td><td>Margens largas, mas o conteúdo flutua no meio do slide com faixas vazias acima e abaixo.</td><td>Grid de 6 colunas, margem de 88 px, calha de 32 px. O espaço vazio passa a ser intencional: ancorado em cima ou embaixo, nunca sobrando no meio.</td></tr>
+        <tr><td><b>Destaques</b></td><td>Marca-texto verde-claro em trechos literais; palavras-chave em verde vivo no bloco preto.</td><td>Mantidos como componentes <code class="path">Mark</code> e <code class="path">Hl</code>, com uma única regra: no máximo um destaque por bloco.</td></tr>
+        <tr><td><b>Boxes</b></td><td>Cartões brancos com cantos bem arredondados e sombra; bloco preto “Sem juridiquês”.</td><td>Cantos de 0–4 px, sem sombra. O bloco preto continua sendo a assinatura, agora ocupando a largura inteira (slide 03).</td></tr>
+        <tr><td><b>Assinaturas</b></td><td>Rótulo mono sublinhado, paginação “02 / 04”, @ no rodapé, CTA de link no canto, colchetes [ ] explicando a lei na linha.</td><td>Viraram o kit fixo: barra de progresso no topo + rótulo + paginação; rodapé com @ + próxima ação; colchete como recurso gráfico de tradução.</td></tr>
+        <tr><td><b>Legibilidade</b></td><td>Rótulos com cerca de 15 px numa arte de 1080 px (~5 pt no celular); corpo em torno de 30 px.</td><td>Mínimo de 21 px para rótulos e 27–32 px para corpo; títulos de 76 a 232 px.</td></tr>
+        <tr><td><b>Copy</b></td><td>Capas descritivas (“Imóvel integralizado no capital social paga ITBI?”), CTAs repetidos (“Veja o Mapa Visual” em vários slides).</td><td>Capa com número concreto, cada rodapé anuncia o próximo slide, uma única chamada final.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note warn"><span class="label" style="color:var(--alert)">Riscos técnicos encontrados</span><p>O selo “Regra Incondicionada” (slide 03 original) afirma mais do que a tese do Tema 796 diz. O dado “mais de 70% dos candidatos confundem…” (V01) não tem fonte. Há divergência entre 272 e 273 questões inéditas (V03). Nada disso foi levado para o redesign sem marcação: veja a seção 09.</p></div>
+  </section>
+
+  <section id="direcao">
+    <div class="head"><span class="label accent">02 · Direção de arte</span><h2>Editorial de negócios, com a precisão de um parecer</h2></div>
+    <div class="cols">
+      <ol class="steps">
+        <li><span>01</span><div><b>Um número ou uma frase domina.</b> Cada slide tem um único elemento lido em menos de 1 segundo; o resto é suporte.</div></li>
+        <li><span>02</span><div><b>Claro e escuro alternam por função.</b> Escuro abre, mostra o erro e fecha; claro ensina e mostra os dados.</div></li>
+        <li><span>03</span><div><b>Lei em serifa, voz da marca em Inter.</b> O leitor sabe se está lendo a norma ou a tradução sem ler o rótulo.</div></li>
+      </ol>
+      <ol class="steps">
+        <li><span>04</span><div><b>Dados desenhados em escala.</b> Barras proporcionais (60/40, 25/75), nunca ilustrativas.</div></li>
+        <li><span>05</span><div><b>Terracota só para o que custa ponto.</b> Incidência, pegadinha, erro.</div></li>
+        <li><span>06</span><div><b>Sem decoração.</b> Nada de ícones, gradientes ou sombras sem função; os únicos ícones (salvar, link, seta) indicam uma ação.</div></li>
+      </ol>
+    </div>
+
+    <h3>Paleta e proporção</h3>
+    <div class="swatches">
+      <div class="sw"><i style="background:#0B110E"></i><div><b>Preto institucional</b><code>#0B110E</code></div></div>
+      <div class="sw"><i style="background:#176B49"></i><div><b>Verde institucional</b><code>#176B49</code></div></div>
+      <div class="sw"><i style="background:#36CD89"></i><div><b>Verde de destaque</b><code>#36CD89</code></div></div>
+      <div class="sw"><i style="background:#F8F9F6"></i><div><b>Fundo editorial</b><code>#F8F9F6</code></div></div>
+      <div class="sw"><i style="background:#EDF3EE"></i><div><b>Superfície</b><code>#EDF3EE</code></div></div>
+      <div class="sw"><i style="background:#D8E1DA"></i><div><b>Divisória</b><code>#D8E1DA</code></div></div>
+      <div class="sw"><i style="background:#B4441A"></i><div><b>Semântica · incide/erro</b><code>#B4441A</code></div></div>
+    </div>
+    <div class="cols">
+      <div style="display:grid;gap:8px"><span class="label">Slide claro</span>
+        <div class="ratio" role="img" aria-label="Proporção no slide claro: 78% fundo, 12% preto, 7% verde, 3% verde de destaque"><i style="width:78%;background:#F8F9F6"></i><i style="width:12%;background:#0B110E"></i><i style="width:7%;background:#176B49"></i><i style="width:3%;background:#36CD89"></i></div>
+        <span style="font-size:13.5px;color:var(--sub)">78 fundo · 12 preto · 7 verde · 3 destaque</span></div>
+      <div style="display:grid;gap:8px"><span class="label">Slide escuro</span>
+        <div class="ratio" role="img" aria-label="Proporção no slide escuro: 80% preto, 12% branco, 6% verde de destaque, 2% terracota"><i style="width:80%;background:#0B110E"></i><i style="width:12%;background:#FFFFFF"></i><i style="width:6%;background:#36CD89"></i><i style="width:2%;background:#B4441A"></i></div>
+        <span style="font-size:13.5px;color:var(--sub)">80 preto · 12 branco · 6 destaque · 2 terracota (só se houver incidência)</span></div>
+    </div>
+
+    <h3>Escala tipográfica (arte de 1080 px)</h3>
+    <div class="typescale">
+      <div class="ts"><span class="label">Hero · 194–232 / 900</span><span class="sample" style="font-weight:900;font-size:40px;letter-spacing:-0.045em">R$ 400 mil</span></div>
+      <div class="ts"><span class="label">Display · 104 / 900</span><span class="sample" style="font-weight:900;font-size:30px;letter-spacing:-0.045em">3 leituras antes de marcar.</span></div>
+      <div class="ts"><span class="label">H1 · 76 / 800</span><span class="sample" style="font-weight:800;font-size:24px;letter-spacing:-0.035em">O que a Constituição garante</span></div>
+      <div class="ts"><span class="label">H2 · 54 / 800</span><span class="sample" style="font-weight:800;font-size:20px;letter-spacing:-0.03em">Até quanto é imune?</span></div>
+      <div class="ts"><span class="label">Corpo · 32 / 500</span><span class="sample" style="font-size:16px">Só até o capital integralizado. O excedente paga ITBI.</span></div>
+      <div class="ts"><span class="label">Lei · 38–46 / serif 500</span><span class="sample" style="font-family:var(--law);font-size:17px">“…não alcança o valor dos bens que exceder o limite do capital social…”</span></div>
+      <div class="ts"><span class="label">Rótulo · 21 / mono 600</span><span class="sample label accent">Tese literal · STF · Tema 796</span></div>
+    </div>
+
+    <div class="cols">
+      <div class="note"><span class="label accent">Grid do feed · 1080 × 1350</span><p>Margem de 88 px; 6 colunas com calha de 32 px; barra de topo a 88 px; rodapé alinhado à margem inferior. Texto corrido com no máximo ~38 caracteres por linha.</p></div>
+      <div class="note"><span class="label accent">Grid dos stories · 1080 × 1920</span><p>Conteúdo entre y = 250 e y = 1580 (fora disso ficam o perfil e o campo de resposta). Figurinhas ocupam áreas reservadas e marcadas na versão guia.</p></div>
+    </div>
+  </section>
+
+  <section id="biblioteca">
+    <div class="head"><span class="label accent">03 · Biblioteca de componentes e modelos</span><h2>Peças montadas a partir de 14 componentes</h2></div>
+    <div class="cols">
+      <div class="tbl"><table>
+        <thead><tr><th>Componente</th><th>Função</th></tr></thead>
+        <tbody>
+          <tr><td><code class="path">TopBar</code></td><td>Barra que enche com a posição no carrossel + rótulo + paginação</td></tr>
+          <tr><td><code class="path">Footer</code></td><td>@nexofiscalbr + próxima ação (nunca dois CTAs)</td></tr>
+          <tr><td><code class="path">Text</code></td><td>Aplica a escala hero/display/h1/h2/lead/body/small</td></tr>
+          <tr><td><code class="path">Hl</code> · <code class="path">Warn</code></td><td>Destaque verde · destaque semântico terracota</td></tr>
+          <tr><td><code class="path">Law</code> · <code class="path">Mark</code></td><td>Texto literal com régua verde · marca-texto (anima nos stories)</td></tr>
+          <tr><td><code class="path">Br</code></td><td>Tradução entre colchetes na mesma linha</td></tr>
+          <tr><td><code class="path">SplitBar</code> · <code class="path">Stat</code></td><td>Barra proporcional · número dominante com rótulo</td></tr>
+        </tbody>
+      </table></div>
+      <div class="tbl"><table>
+        <thead><tr><th>#</th><th>Modelo</th><th>Aplicado em</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Capa editorial</td><td>Carrossel 01A e 01B</td></tr>
+          <tr><td>2</td><td>Comparativo entre bancas</td><td>Modelo com dados a preencher</td></tr>
+          <tr><td>3</td><td>Ranking de incidência</td><td>Modelo com dados a preencher</td></tr>
+          <tr><td>4</td><td>Questão comentada</td><td>Questão inédita do V01 (2 slides)</td></tr>
+          <tr><td>5</td><td>Erro clássico</td><td>Carrossel 05 e SV 31</td></tr>
+          <tr><td>6</td><td>Mapa de revisão rápida</td><td>Carrossel 04</td></tr>
+          <tr><td>7</td><td>Story com quiz</td><td>Story 2</td></tr>
+          <tr><td>8</td><td>Story de conteúdo</td><td>Stories 3 e 4</td></tr>
+          <tr><td>9</td><td>Story de produto</td><td>Story 5</td></tr>
+          <tr><td>10</td><td>Card de conversão</td><td>Carrossel 07A e 07B</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <section id="carrossel">
+    <div class="head"><span class="label accent">04 · Redesign · Carrossel Tema 796</span><h2>7 slides: gancho, regra, tese, números, erro, checklist, salvar</h2></div>
+    <p><b>Objetivo do carrossel:</b> autoridade e salvamentos. Ele é material de revisão; a conversão fica com os stories, que têm figurinha de link. Por isso a chamada final é “Salvar”, e a versão de produto (07B) fica como teste A/B.</p>
+    <h3>Antes e depois</h3>
+    <div class="ba">
+      <figure><img src="img/ORIG-C01-Slide1.jpg" alt="Capa original: Imóvel integralizado no capital social paga ITBI?" loading="lazy" width="720" height="900"><figcaption><b>Antes · capa</b><span>Pergunta descritiva, título no meio do slide, sem número.</span></figcaption></figure>
+      <figure><img src="img/DS-T796-01A-capa-impacto.jpg" alt="Nova capa: Integralizou R$ 1 milhão em imóvel. R$ 400 mil pagam ITBI." loading="lazy" width="720" height="900"><figcaption><b>Depois · capa 01A (prioritária)</b><span>O número dominante cria a pergunta “por que 400?”.</span></figcaption></figure>
+      <figure><img src="img/ORIG-C01-Slide2.jpg" alt="Slide original da tese literal" loading="lazy" width="720" height="900"><figcaption><b>Antes · tese</b><span>Cartões arredondados com sombra; a tese ocupa o terço central.</span></figcaption></figure>
+      <figure><img src="img/DS-T796-03-tese.jpg" alt="Novo slide da tese com tradução em bloco preto" loading="lazy" width="720" height="900"><figcaption><b>Depois · tese</b><span>A divisão claro/escuro separa a lei da tradução; a tese ganha corpo maior.</span></figcaption></figure>
+    </div>
+    <h3>Sequência final</h3>
+    <div class="gallery">
+      <figure><img src="img/DS-T796-01A-capa-impacto.jpg" alt="Slide 1A" loading="lazy" width="720" height="900"><figcaption><b>01A · Gancho (impacto editorial)</b><span>Alcance. Número concreto + curiosidade.</span></figcaption></figure>
+      <figure><img src="img/DS-T796-01B-capa-curiosidade.jpg" alt="Slide 1B" loading="lazy" width="720" height="900"><figcaption><b>01B · Gancho (curiosidade)</b><span>Variante A/B. Informação contraintuitiva.</span></figcaption></figure>
+      <figure><img src="img/DS-T796-02-contexto.jpg" alt="Slide 2" loading="lazy" width="720" height="900"><figcaption><b>02 · Contextualização</b><span>A regra literal da CF e a dúvida que a prova cobra.</span></figcaption></figure>
+      <figure><img src="img/DS-T796-03-tese.jpg" alt="Slide 3" loading="lazy" width="720" height="900"><figcaption><b>03 · Tese literal + tradução</b><span>Autoridade. Texto do STF preservado na íntegra.</span></figcaption></figure>
+      <figure><img src="img/DS-T796-04-exemplo.jpg" alt="Slide 4" loading="lazy" width="720" height="900"><figcaption><b>04 · Mapa de revisão</b><span>Salvamento. Barra em escala real: 60/40.</span></figcaption></figure>
+      <figure><img src="img/DS-T796-05-erro-classico.jpg" alt="Slide 5" loading="lazy" width="720" height="900"><figcaption><b>05 · Erro clássico</b><span>Distinção conceitual: trava de valor × trava de atividade.</span></figcaption></figure>
+      <figure><img src="img/DS-T796-06-checklist.jpg" alt="Slide 6" loading="lazy" width="720" height="900"><figcaption><b>06 · Insight estratégico</b><span>O que muda na prova, em 3 leituras.</span></figcaption></figure>
+      <figure><img src="img/DS-T796-07A-cta-salvar.jpg" alt="Slide 7A" loading="lazy" width="720" height="900"><figcaption><b>07A · Conversão: salvar</b><span>Sumário do post para reforçar o valor de salvar.</span></figcaption></figure>
+      <figure><img src="img/DS-T796-07B-cta-produto.jpg" alt="Slide 7B" loading="lazy" width="720" height="900"><figcaption><b>07B · Conversão: material</b><span>Variante A/B com a amostra grátis.</span></figcaption></figure>
+    </div>
+    <div class="note"><span class="label accent">Por que a capa 01A é a prioritária</span><p>Ela lê em um segundo, tem o único número do carrossel que gera dúvida imediata e repete o gancho que teve a maior nota no avaliador do /ig-reel (“R$ 400 mil pagam ITBI”). A 01B é mais elegante, mas depende de o leitor saber que a CF não fixa limite. Fica como teste.</p></div>
+  </section>
+
+  <section id="stories">
+    <div class="head"><span class="label accent">05 · Stories · sequência de conversão</span><h2>Interrupção → quiz → gabarito → desejo → link</h2></div>
+    <p>Feitos para o formato vertical, não recortados do feed. Cada story tem um objetivo, animação curta (5 a 7 s) e área livre para a figurinha nativa. As versões “guia” mostram onde colocar cada figurinha e as zonas cobertas pela interface.</p>
+    <div class="gallery story">
+      <figure><video src="vid/DS-STORY-1-interrupcao.mp4" poster="img/DS-STORY-1-interrupcao.jpg" muted loop playsinline controls preload="none" width="540" height="960"></video><figcaption><b>1 · Interrupção</b><span>Pergunta com o número do caso.</span></figcaption></figure>
+      <figure><video src="vid/DS-STORY-2-quiz.mp4" poster="img/DS-STORY-2-quiz.jpg" muted loop playsinline controls preload="none" width="540" height="960"></video><figcaption><b>2 · Interação</b><span>Figurinha Quiz: “Incide ITBI sobre:”.</span></figcaption></figure>
+      <figure><video src="vid/DS-STORY-3-autoridade.mp4" poster="img/DS-STORY-3-autoridade.jpg" muted loop playsinline controls preload="none" width="540" height="960"></video><figcaption><b>3 · Autoridade</b><span>Gabarito, barra 25/75 e tese literal.</span></figcaption></figure>
+      <figure><video src="vid/DS-STORY-4-desejo.mp4" poster="img/DS-STORY-4-desejo.jpg" muted loop playsinline controls preload="none" width="540" height="960"></video><figcaption><b>4 · Desejo</b><span>Mostra o método: a explicação entre colchetes aparece na linha.</span></figcaption></figure>
+      <figure><video src="vid/DS-STORY-5-conversao.mp4" poster="img/DS-STORY-5-conversao.jpg" muted loop playsinline controls preload="none" width="540" height="960"></video><figcaption><b>5 · Conversão</b><span>Figurinha Link para a amostra.</span></figcaption></figure>
+    </div>
+    <h3>Versões guia</h3>
+    <div class="gallery story">
+      <figure><img src="img/DS-STORY-1-interrupcao-guia.jpg" alt="Guia story 1" loading="lazy" width="540" height="960"><figcaption><span>Zonas da interface</span></figcaption></figure>
+      <figure><img src="img/DS-STORY-2-quiz-guia.jpg" alt="Guia story 2 com posição do quiz" loading="lazy" width="540" height="960"><figcaption><span>Quiz em y 1110–1510; resposta certa: R$ 1,5 milhão</span></figcaption></figure>
+      <figure><img src="img/DS-STORY-3-autoridade-guia.jpg" alt="Guia story 3" loading="lazy" width="540" height="960"><figcaption><span>Sem figurinha</span></figcaption></figure>
+      <figure><img src="img/DS-STORY-4-desejo-guia.jpg" alt="Guia story 4" loading="lazy" width="540" height="960"><figcaption><span>Sem figurinha</span></figcaption></figure>
+      <figure><img src="img/DS-STORY-5-conversao-guia.jpg" alt="Guia story 5 com posição do link" loading="lazy" width="540" height="960"><figcaption><span>Link em y 1360–1510</span></figcaption></figure>
+    </div>
+  </section>
+
+  <section id="modelos">
+    <div class="head"><span class="label accent">06 · Demais modelos</span><h2>Questão comentada, erro clássico e modelos de dados</h2></div>
+    <div class="gallery">
+      <figure><img src="img/DS-QC-01-enunciado.jpg" alt="Questão comentada: enunciado" loading="lazy" width="720" height="900"><figcaption><b>Questão comentada · 1/2</b><span>Questão inédita do V01, sem alterações.</span></figcaption></figure>
+      <figure><img src="img/DS-QC-02-gabarito.jpg" alt="Questão comentada: gabarito" loading="lazy" width="720" height="900"><figcaption><b>Questão comentada · 2/2</b><span>Gabarito B em destaque + onde está a pegadinha.</span></figcaption></figure>
+      <figure><img src="img/DS-SV31-erro-classico.jpg" alt="Erro clássico SV 31" loading="lazy" width="720" height="900"><figcaption><b>Erro clássico · SV 31</b><span>Mesmo modelo aplicado a ISS.</span></figcaption></figure>
+      <figure><img src="img/DS-MODELO-comparativo-bancas.jpg" alt="Modelo comparativo entre bancas" loading="lazy" width="720" height="900"><figcaption><b>Modelo · comparativo entre bancas</b><span>Dados fictícios marcados. Exige levantamento próprio com fonte.</span></figcaption></figure>
+      <figure><img src="img/DS-MODELO-ranking-incidencia.jpg" alt="Modelo ranking de incidência" loading="lazy" width="720" height="900"><figcaption><b>Modelo · ranking de incidência</b><span>Barras em escala do dado real; linha de fonte obrigatória.</span></figcaption></figure>
+    </div>
+    <div class="note warn"><span class="label" style="color:var(--alert)">Sem dados inventados</span><p>Os modelos de comparativo e de ranking saem com “00%” e {campos} entre chaves, mais um selo vermelho que impede a publicação por engano. Para preencher: número de questões, provas, período e cargos do recorte, sempre citados na linha de fonte.</p></div>
+  </section>
+
+  <section id="copy">
+    <div class="head"><span class="label accent">07 · Copy final e testes A/B</span><h2>Uma promessa por slide, uma chamada por peça</h2></div>
+    <div class="tbl"><table>
+      <thead><tr><th>Peça</th><th>Objetivo</th><th>Título</th><th>Chamada</th></tr></thead>
+      <tbody>
+        <tr><td>Carrossel 01A</td><td>Alcance</td><td>Integralizou R$ 1 milhão em imóvel. R$ 400 mil pagam ITBI.</td><td>Arraste →</td></tr>
+        <tr><td>Carrossel 02</td><td>Retenção</td><td>O que a Constituição garante</td><td>A resposta do STF →</td></tr>
+        <tr><td>Carrossel 03</td><td>Autoridade</td><td>Tese literal + “Só é imune a parte do imóvel que vira quotas sociais.”</td><td>Veja nos números →</td></tr>
+        <tr><td>Carrossel 04</td><td>Salvamento</td><td>Imóvel de R$ 1 milhão. Capital subscrito de R$ 600 mil.</td><td>O erro clássico →</td></tr>
+        <tr><td>Carrossel 05</td><td>Engajamento</td><td>Não confunda as duas travas do inciso I.</td><td>Checklist de prova →</td></tr>
+        <tr><td>Carrossel 06</td><td>Salvamento</td><td>3 leituras antes de marcar.</td><td>Salve para a revisão →</td></tr>
+        <tr><td>Carrossel 07A</td><td>Salvamento</td><td>Salve para revisar antes da prova.</td><td>Salvar</td></tr>
+        <tr><td>Questão comentada</td><td>Engajamento</td><td>Enunciado V01</td><td>Responda antes de arrastar →</td></tr>
+        <tr><td>SV 31</td><td>Autoridade</td><td>Locação de bem móvel não é serviço.</td><td>Veja o Mapa Visual →</td></tr>
+        <tr><td>Stories 1–5</td><td>Conversão</td><td>Quanto paga ITBI? → Quiz → R$ 1,5 milhão → Explicação na mesma linha → 20 páginas reais</td><td>Figurinha Link: amostra</td></tr>
+      </tbody>
+    </table></div>
+    <div class="cols">
+      <div style="display:grid;gap:12px"><h3>Títulos para teste A/B</h3>
+        <ul class="clean">
+          <li><span class="chip">A · em uso</span> Integralizou R$ 1 milhão em imóvel. R$ 400 mil pagam ITBI.</li>
+          <li><span class="chip">B · pronto</span> A Constituição não fala em limite. O STF falou.</li>
+          <li><span class="chip">C</span> Imunidade de ITBI na integralização tem teto: o capital subscrito.</li>
+          <li><span class="chip">D</span> Ágio na integralização: imune ou tributado?</li>
+          <li><span class="chip">E</span> O detalhe de ITBI que fica na reserva de capital.</li>
+        </ul></div>
+      <div style="display:grid;gap:12px"><h3>Chamadas e stories para teste</h3>
+        <ul class="clean">
+          <li><span class="chip">07A × 07B</span> “Salvar” × “Amostra grátis de 20 páginas · link no perfil”.</li>
+          <li><span class="chip">Story 1</span> “Quanto paga ITBI?” × “Imune ao ITBI? Só até aqui.”</li>
+          <li><span class="chip">Story 5</span> “20 páginas reais do material” × “Veja como o material traduz a lei seca”.</li>
+        </ul>
+        <p style="font-size:15px;color:var(--sub)">Como medir: carrossel por salvamentos ÷ alcance, compartilhamentos ÷ alcance e % de alcance de não seguidores; stories por taxa de saída no 1, respostas do quiz ÷ alcance no 2 e toques no link ÷ alcance no 5. Troque uma variável por vez e compare posts de temas parecidos.</p></div>
+    </div>
+  </section>
+
+  <section id="qualidade">
+    <div class="head"><span class="label accent">08 · Avaliação interna de qualidade</span><h2>Notas de 0 a 10 depois das revisões</h2></div>
+    <p style="font-size:15px;color:var(--sub)">É a avaliação interna do acabamento, não uma previsão de desempenho. Peças que ficaram abaixo de 9 na primeira passada foram corrigidas (lista ao lado da tabela).</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Peça</th><th class="num">Impacto</th><th class="num">Clareza</th><th class="num">Identidade</th><th class="num">Hierarquia</th><th class="num">Retenção</th><th class="num">Salva/compart.</th><th class="num">CTA</th><th class="num">Precisão</th><th class="num">Acabamento</th></tr></thead>
+      <tbody>
+        <tr><td>Carrossel Tema 796</td><td class="num score">9,5</td><td class="num score">9,5</td><td class="num score">9,5</td><td class="num score">9,5</td><td class="num score">9</td><td class="num score">9,5</td><td class="num score">9</td><td class="num score">9*</td><td class="num score">9</td></tr>
+        <tr><td>Stories 1–5</td><td class="num score">9,5</td><td class="num score">9</td><td class="num score">9</td><td class="num score">9,5</td><td class="num score">9</td><td class="num score">9</td><td class="num score">9,5</td><td class="num score">9,5</td><td class="num score">9</td></tr>
+        <tr><td>Questão comentada</td><td class="num score">9</td><td class="num score">9</td><td class="num score">9,5</td><td class="num score">9</td><td class="num score">9,5</td><td class="num score">9</td><td class="num score">9</td><td class="num score">9,5</td><td class="num score">9</td></tr>
+        <tr><td>SV 31 · erro clássico</td><td class="num score">9</td><td class="num score">9,5</td><td class="num score">9,5</td><td class="num score">9</td><td class="num score">9</td><td class="num score">9</td><td class="num score">9</td><td class="num score">9</td><td class="num score">9</td></tr>
+        <tr><td>Modelos de dados</td><td class="num score">9</td><td class="num score">9</td><td class="num score">9,5</td><td class="num score">9</td><td class="num">—</td><td class="num">—</td><td class="num score">9</td><td class="num">—</td><td class="num score">9</td></tr>
+      </tbody>
+    </table></div>
+    <div class="cols">
+      <div class="note"><span class="label accent">Corrigido na revisão</span><p>Capa 01A: o número estourava a largura (232 → 194 px). Slide 04: os valores quebravam em duas linhas, então viraram linhas empilhadas. Slide 05: o “I.” ficava sozinho na linha. Slide 03: a tese cresceu de 40 para 46 px. Story 1: o texto foi centralizado e o título principal aumentou. Story 2: os rótulos foram reorganizados e o aviso saiu da área do quiz.</p></div>
+      <div class="note warn"><span class="label" style="color:var(--alert)">* Precisão condicionada</span><p>O 9 do carrossel depende de confirmar o status do Tema 1.348 citado no slide 05. As notas “—” dos modelos dependem do levantamento de dados.</p></div>
+    </div>
+  </section>
+
+  <section id="validar">
+    <div class="head"><span class="label accent">09 · Validar antes de postar</span><h2>Quatro pontos para o olhar do especialista</h2></div>
+    <ol class="steps">
+      <li><span>01</span><div><b>Tema 1.348 (STF).</b> O slide 05 diz que o alcance da trava de atividade na integralização está em discussão. Confirme o número e o andamento na data da publicação; se já houver tese, atualize a frase.</div></li>
+      <li><span>02</span><div><b>“Regra Incondicionada” saiu.</b> A tese do Tema 796 trata do limite de valor, não da exceção de atividade. O redesign usa “só até o capital integralizado”.</div></li>
+      <li><span>03</span><div><b>“Mais de 70% dos candidatos…” (V01) não foi usado.</b> Só volta com fonte (levantamento próprio, n, período).</div></li>
+      <li><span>04</span><div><b>272 × 273 questões inéditas.</b> O story 5 usa 273, como no V01; o V03 mostra os dois números.</div></li>
+    </ol>
+  </section>
+
+  <section id="arquivos">
+    <div class="head"><span class="label accent">10 · Arquivos e edição</span><h2>Tudo é editável no código</h2></div>
+    <div class="cols">
+      <ul class="clean">
+        <li><b>Copy de todas as peças</b><br><code class="path">src/ds/copy.ts</code></li>
+        <li><b>Tokens</b> (cores, fontes, grid, escala)<br><code class="path">src/ds/tokens.ts</code></li>
+        <li><b>Componentes</b><br><code class="path">src/ds/ui.tsx</code></li>
+        <li><b>Peças do feed e stories</b><br><code class="path">src/ds/feed.tsx</code> · <code class="path">src/ds/stories.tsx</code></li>
+      </ul>
+      <ul class="clean">
+        <li><b>Gerar um PNG</b><br><code class="path">npx remotion still src/index.ts DS-T796-04-exemplo out.png</code></li>
+        <li><b>Gerar um story em vídeo</b><br><code class="path">npx remotion render src/index.ts DS-STORY-2-quiz story2.mp4</code></li>
+        <li><b>Editar ao vivo</b><br><code class="path">npm run studio</code></li>
+        <li><b>Figma</b>: o conector não abriu nesta sessão; a fonte de verdade editável é o código.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="end">NEXO Fiscal · sistema visual v1 · peças em 1080 × 1350 (feed) e 1080 × 1920 (stories) · nada aqui é publicado automaticamente.</footer>
+</div>
+
+</body>
+</html>
