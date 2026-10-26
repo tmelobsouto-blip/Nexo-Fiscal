@@ -10,7 +10,9 @@
     "reel796:beats": "python3 -I scripts/beats_json.py reels/tema796/script.txt src/carousel01/beats.json --target 30",
     "reel796:render": "remotion render src/index.ts Reel796-Clean out/carousel01/reel-tema796-Clean.mp4",
     "test": "remotion still src/index.ts DS-T796-04-exemplo out/test/smoke.png",
-    "validate": "npm run typecheck && npm run test"
+    "validate": "npm run typecheck && npm run test",
+    "bancas:beats": "python3 -I scripts/beats_json.py reels/bancas-tributario/script.txt src/ds/reels/bancas-tributario.beats.json --target 32",
+    "bancas:render": "remotion render src/index.ts DS-REEL-bancas-tributario exports/reels/DS-REEL-bancas-tributario.mp4"
   },
   "dependencies": {
     "@fontsource/archivo-black": "5.3.0",

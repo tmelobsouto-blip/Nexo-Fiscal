@@ -3,6 +3,7 @@ import { Composition, Still } from 'remotion';
 import { REEL_FRAMES, Reel796 } from './carousel01/Reel';
 import { CAROUSEL_SLIDES } from './carousel01/Slides';
 import { FEED } from './ds/feed';
+import { BANCAS_TRIBUTARIO_FRAMES, BancasTributario } from './ds/reels/BancasTributario';
 import { STORY_LIST } from './ds/stories';
 import { loadFonts } from './fonts';
 import { Story } from './Story';
@@ -32,6 +33,8 @@ export const RemotionRoot: React.FC = () => (
     {FEED.map(({ id, component }) => (
       <Still key={id} id={id} component={component} width={1080} height={1350} />
     ))}
+    <Composition id="DS-REEL-bancas-tributario" component={BancasTributario} {...base} durationInFrames={BANCAS_TRIBUTARIO_FRAMES} defaultProps={{ showInstagramUI: false }} />
+    <Composition id="DS-REEL-bancas-tributario-mockup" component={BancasTributario} {...base} durationInFrames={BANCAS_TRIBUTARIO_FRAMES} defaultProps={{ showInstagramUI: true }} />
     {STORY_LIST.map(({ id, component, frames }) => (
       <React.Fragment key={id}>
         <Composition id={id} component={component} {...base} durationInFrames={frames} defaultProps={{ guide: false }} />

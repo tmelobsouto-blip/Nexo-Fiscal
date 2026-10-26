@@ -73,6 +73,7 @@ Se o Chrome do Remotion não baixar no seu ambiente, aponte para um Chromium loc
 | `DS-SV31-erro-classico` | Erro clássico · SV 31 |
 | `DS-MODELO-comparativo-bancas`, `DS-MODELO-ranking-incidencia` | Modelos com dados a preencher |
 | `DS-STORY-1-interrupcao` … `DS-STORY-5-conversao` (+ `-guia`) | Sequência de stories |
+| `DS-REEL-bancas-tributario` (+ `-mockup`) | Reel: Direito Tributário por banca (32 s) · roteiro em `docs/roteiros/` |
 | `Reel796-Clean`, `Reel796-Mockup` | Reel Tema 796 (~28 s) |
 | `C01-Slide1` … `C01-Slide4`, `SV31-Slide2` | Carrossel #01 original recriado |
 
