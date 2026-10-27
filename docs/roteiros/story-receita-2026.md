@@ -7,7 +7,7 @@
 | Objetivo | Alcance e retenção na sequência; enquete no card 11; seguir no card 12 |
 | Composições | `DS-STORY-receita-2026-01` … `-12` (publicar) · `-capa` (capa clara do post) · `-11-guia` (posição da enquete) · `DS-STORY-receita-2026` (prévia de 84 s) · `-mockup` (com a interface do Instagram) |
 | Código | `src/ds/motion/Receita2026.tsx` · texto e narração em `RECEITA_2026` (`src/ds/copy.ts`) · trilha em `scripts/receita-2026-trilha.py` |
-| Arquivos | `exports/stories/receita-2026/` (12 MP4, guia da enquete e folha de contato `-folha.png`) · prévia completa em `out/DS-STORY-receita-2026.mp4` |
+| Arquivos | `exports/stories/receita-2026/` (12 MP4, guia da enquete e folha de contato `-folha.png`) · vídeo completo de 84 s para o feed em `DS-STORY-receita-2026-completo.mp4` |
 
 O Instagram corta vídeos de story com mais de 60 s, e a figurinha de enquete vale para um card só. Por isso a sequência sai em 12 arquivos de 7 s, na ordem.
 
@@ -15,7 +15,7 @@ O Instagram corta vídeos de story com mais de 60 s, e a figurinha de enquete va
 
 | # | Tempo | Texto na tela | Narração | Visual | Fonte na tela |
 |---|---|---|---|---|---|
-| 01 | 00:00–00:07 | RECEITA FEDERAL · O EDITAL ESTÁ **MAIS PERTO.** | Atenção, concurseiro! O novo concurso da Receita Federal está avançando. | 0–1 s tela preta com som grave · 1–2 s “RECEITA” gigante na batida · 2–4 s corte para o prédio com leve aproximação · 4–7 s “MAIS PERTO.” em verde e linha que percorre a tela | — |
+| 01 | 00:00–00:07 | RECEITA FEDERAL · O EDITAL ESTÁ **MAIS PERTO.** | Atenção, concurseiro! O novo concurso da Receita Federal está avançando. | 0–1 s **capa** (fundo claro, ver abaixo) com som grave · corte seco na batida · 1–2 s “RECEITA” gigante na batida · 2–4 s corte para o prédio com leve aproximação · 4–7 s “MAIS PERTO.” em verde e linha que percorre a tela | — |
 | 02 | 00:07–00:14 | **17** · PROPOSTAS EM ANÁLISE | Dezessete propostas foram registradas no processo de escolha da banca organizadora. | Linhas de documentos correndo ao fundo · contador 01 → 17 · legenda “Propostas registradas no processo” · “Nomes das instituições não divulgados” · zoom no 17 | Processo de contratação da banca · SEI |
 | 03 | 00:14–00:21 | NOVOS DOCUMENTOS · CONTRATAÇÃO EM ANDAMENTO | E uma minuta de dispensa de licitação já foi registrada no processo. | Documento em perspectiva · carimbo “MINUTA” · o documento sai e entram as etapas: Propostas (até 30/09) ✓ · Minuta de dispensa (20/10) ✓ · Definição da banca, com contorno verde pulsando | Processo de contratação da banca · SEI |
 | 04 | 00:21–00:28 | **146** · VAGAS AUTORIZADAS | O governo federal já autorizou 146 vagas para a Receita Federal. | Contador 0 → 146 · partículas geométricas · selo verde “Autorização oficial” · o número se parte em dois blocos | Portaria MGI nº 5.505/2026 |
@@ -48,7 +48,7 @@ Renderizar tudo de novo (12 cards, guia e prévia): `npm run receita2026:render`
 3. No card 12, se quiser, adicione a figurinha de menção ao @nexofiscalbr logo abaixo da marca.
 4. Fixe a sequência num destaque “Receita 2026” e atualize quando a banca sair.
 
-**Capa (feed ou Reel com o vídeo completo).** O 1º quadro do vídeo é a tela preta do gancho, então a capa automática sai escura. Ao postar, toque em **Editar capa → Adicionar da galeria** e escolha `exports/stories/receita-2026/DS-STORY-receita-2026-capa.jpg` (1080 × 1920, fundo claro). Todo o conteúdo fica dentro do recorte 3:4 da grade do perfil (y 240 a 1680). Texto da capa em `RECEITA_2026.cover` (`src/ds/copy.ts`); composição `DS-STORY-receita-2026-capa`.
+**Capa.** O vídeo abre com a capa no 1º segundo (fundo claro, “RECEITA FEDERAL 2026”, 146 vagas, 17 propostas, previsão de dezembro), então o feed e a grade já mostram conteúdo antes do play, sem tela preta. Todo o texto fica dentro do recorte 4:5 do feed e do 3:4 da grade. Se o Instagram escolher outro quadro, use **Editar capa** e deixe o seletor no início, ou **Adicionar da galeria** com `exports/stories/receita-2026/DS-STORY-receita-2026-capa.jpg`. Texto em `RECEITA_2026.cover` (`src/ds/copy.ts`).
 
 ## Checagem dos fatos (27/10/2026)
 

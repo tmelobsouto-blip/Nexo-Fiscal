@@ -286,7 +286,7 @@ export const RECEITA_2026 = {
   },
   s11: { a: 'O edital ainda não saiu.', b: 'Sua preparação', hl: 'já começou?', poll: ['Já estou estudando', 'Vou começar'] },
   s12: { a: 'Receita Federal 2026', b: 'Não perca as próximas atualizações.', cta: 'Siga para mais atualizações', brand: { a: 'NEXO', b: 'Fiscal' } },
-  // Capa clara para o post (o 1º quadro do vídeo é a tela preta do gancho).
+  // Capa: 1º segundo do card 01 (quadro que o feed mostra antes do play) e imagem avulsa.
   cover: {
     kicker: 'Banca e edital se aproximam',
     title: ['Receita', 'Federal'],

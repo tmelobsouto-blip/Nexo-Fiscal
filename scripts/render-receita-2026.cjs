@@ -18,7 +18,7 @@ const browserExecutable = process.env.REMOTION_BROWSER;
   const guide = await pick('DS-STORY-receita-2026-11-guia');
   await renderStill({ serveUrl, composition: guide, frame: 120, output: `${OUT}/DS-STORY-receita-2026-11-guia.png`, browserExecutable });
   if (process.argv.includes('--preview')) {
-    await renderMedia({ serveUrl, composition: await pick('DS-STORY-receita-2026'), codec: 'h264', outputLocation: 'out/DS-STORY-receita-2026.mp4', browserExecutable });
+    await renderMedia({ serveUrl, composition: await pick('DS-STORY-receita-2026'), codec: 'h264', outputLocation: `${OUT}/DS-STORY-receita-2026-completo.mp4`, browserExecutable });
     console.log('ok preview');
   }
 })().catch((e) => {

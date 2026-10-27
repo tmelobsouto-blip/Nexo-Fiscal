@@ -293,8 +293,12 @@ const Desk: React.FC<{ f: number }> = ({ f }) => {
 
 // ---------------------------------------------------------------- scenes
 
+// O 1º segundo é a capa: é o quadro que o feed e a grade mostram antes do play.
+const COVER_FRAMES = 30;
+
 const S01: React.FC<SceneProps> = ({ captions, buildingSrc }) => {
   const f = useCurrentFrame();
+  if (f < COVER_FRAMES) return <Receita2026Capa />;
   const slam = out(f, 30, 38);
   const zoom = interpolate(f, [60, 210], [1, 1.1], clamp);
   const head = out(f, 60, 72);
