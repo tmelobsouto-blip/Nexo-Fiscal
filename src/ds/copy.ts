@@ -388,7 +388,13 @@ export const SV31_POST = {
     q: 'ISS?',
     action: 'Veja a Súmula e o Mapa →',
   },
-  law: { label: 'Súmula literal · SV 31 do STF', source: 'Texto literal da Súmula Vinculante 31', action: 'Veja o Mapa Visual →' },
+  law: {
+    label: 'Súmula literal · SV 31 do STF',
+    source: 'Texto literal da Súmula Vinculante 31',
+    give: { k: 'Obrigação de dar', v: 'Alugar o bem' },
+    make: { k: 'Obrigação de\u00a0fazer', v: 'Prestar serviço' },
+    action: 'Veja o Mapa Visual →',
+  },
   map: {
     label: 'Mapa visual · Súmula Vinculante 31',
     kicker: 'Contrato de locação móvel',

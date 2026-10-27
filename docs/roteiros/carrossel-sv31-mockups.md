@@ -1,5 +1,7 @@
 # Carrossel SV 31 · três direções visuais
 
+**Escolhida: direção C (Recorte).** Versão final em `exports/feed/DS-SV31-01C-capa.png` … `DS-SV31-04C-material.png`, prancha em `DS-SV31-MOCKUP-C.png`.
+
 Mesmo carrossel de 4 slides (capa, súmula literal, mapa visual, material), com o texto do post publicado e o literal da Súmula Vinculante 31, em três composições inspiradas nas referências enviadas. Tudo dentro do sistema: só cores dos tokens, cantos até 4 px, sem degradê nem sombra, Inter/Noto Sans Mono/Source Serif 4 (serifa só no texto da súmula).
 
 | Direção | Ideia | Traço da referência que foi traduzido |
@@ -9,6 +11,17 @@ Mesmo carrossel de 4 slides (capa, súmula literal, mapa visual, material), com 
 | C · Recorte | Verde-destaque contra preto, guindaste recortado, “×” entre os dois casos | Contraste verde × preto, objeto recortado sobre bloco, “×” do comparativo |
 
 Arquivos em `exports/feed/`: slides `DS-SV31-0{1-4}{A|B|C}-*.png` (1080 × 1350) e pranchas `DS-SV31-MOCKUP-{A|B|C}.png` (post no feed + os 4 slides). Código em `src/ds/posts/Sv31Mockups.tsx`; texto em `SV31_POST` e `SV31` (`src/ds/copy.ts`).
+
+## Versão final (C)
+
+| Slide | Ilustração |
+|---|---|
+| 01 Capa | Guindaste sobre caminhão recortado num bloco verde, sobre o painel verde-destaque |
+| 02 Súmula | Chave com etiqueta (“Obrigação de dar · Alugar o bem”) ≠ operador de capacete e colete (“Obrigação de fazer · Prestar serviço”), acima da tradução |
+| 03 Mapa | Mesmo guindaste nos dois casos: cabine vazia (locação pura) × operador na cabine e outro de pé com o controle (com operador) |
+| 04 Material | Duas páginas esquemáticas saindo de um recorte preto |
+
+As ilustrações estão em `Crane`, `Operator` e `KeyArt` (`src/ds/posts/Sv31Mockups.tsx`): blocos planos, só cores dos tokens, sem sombra nem degradê. Reaproveite em outros posts de ISS e locação.
 
 ## Decisões
 

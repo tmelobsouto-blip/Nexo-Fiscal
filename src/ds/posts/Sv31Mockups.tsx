@@ -103,37 +103,91 @@ const Pages: React.FC<{ x: number; y: number; scale?: number; line?: string }> =
 };
 
 type CraneTone = { body: string; boom: string; dark: string; glass: string; operator?: boolean };
-const Crane: React.FC<{ width: number; t: CraneTone }> = ({ width, t }) => (
+
+/** Guindaste sobre caminhão, em blocos planos. `operator` põe alguém na cabine. */
+const Crane: React.FC<{ width: number; t: CraneTone; ground?: boolean }> = ({ width, t, ground }) => (
   <svg width={width} height={(width * 360) / 520} viewBox="0 0 520 360" style={{ display: 'block', overflow: 'visible' }}>
-    <rect x={70} y={276} width={14} height={50} fill={t.dark} />
-    <rect x={56} y={322} width={42} height={10} fill={t.dark} />
-    <rect x={430} y={276} width={14} height={50} fill={t.dark} />
-    <rect x={416} y={322} width={42} height={10} fill={t.dark} />
-    <rect x={40} y={232} width={440} height={50} fill={t.body} />
-    <rect x={376} y={160} width={104} height={74} fill={t.body} />
-    <rect x={392} y={172} width={74} height={42} fill={t.glass} />
+    {ground ? <rect x={-30} y={331} width={580} height={5} fill={t.dark} /> : null}
+    {[70, 430].map((x) => (
+      <g key={x}>
+        <rect x={x} y={272} width={14} height={52} fill={t.dark} />
+        <rect x={x - 14} y={320} width={42} height={11} fill={t.dark} />
+      </g>
+    ))}
+    <rect x={40} y={232} width={440} height={44} fill={t.body} />
+    <rect x={40} y={270} width={440} height={10} fill={t.dark} />
+    <rect x={470} y={250} width={18} height={26} fill={t.dark} />
+    <rect x={376} y={156} width={104} height={78} fill={t.body} />
+    <rect x={372} y={150} width={112} height={10} fill={t.dark} />
+    <rect x={418} y={138} width={22} height={12} fill={C.alertSoft} />
+    <polygon points="392,170 462,170 470,212 392,212" fill={t.glass} />
     {t.operator ? (
       <g>
-        <rect x={418} y={196} width={26} height={18} fill={C.green} />
-        <circle cx={431} cy={186} r={11} fill={C.surface} />
-        <path d="M418 184 a13 13 0 0 1 26 0 Z" fill={C.mint} />
+        <rect x={416} y={198} width={28} height={14} fill={C.green} />
+        <circle cx={430} cy={188} r={11} fill={C.surface} />
+        <path d="M417 186 a13 13 0 0 1 26 0 Z" fill={C.white} />
+        <rect x={414} y={184} width={32} height={4} fill={C.white} />
       </g>
     ) : null}
-    <rect x={120} y={198} width={112} height={34} fill={t.body} />
+    <rect x={392} y={216} width={3} height={18} fill={t.dark} />
+    <rect x={484} y={178} width={7} height={26} fill={t.dark} />
+    <rect x={96} y={188} width={30} height={44} fill={t.dark} />
+    <rect x={118} y={196} width={116} height={36} fill={t.body} />
+    <rect x={118} y={224} width={116} height={6} fill={t.dark} fillOpacity={0.3} />
     <g transform="translate(176 208) rotate(-32)">
-      <rect x={0} y={-15} width={384} height={30} fill={t.boom} />
-      {[40, 100, 160, 220, 280, 340].map((x) => (
-        <path key={x} d={`M${x} -15 l24 30`} stroke={t.dark} strokeOpacity={0.35} strokeWidth={4} />
+      <rect x={0} y={-16} width={230} height={32} fill={t.boom} />
+      <rect x={226} y={-12} width={158} height={24} fill={t.boom} />
+      <rect x={226} y={-16} width={4} height={32} fill={t.dark} fillOpacity={0.5} />
+      {[30, 80, 130, 180, 250, 300, 350].map((x) => (
+        <path key={x} d={`M${x} -12 l22 24`} stroke={t.dark} strokeOpacity={0.35} strokeWidth={4} />
       ))}
     </g>
-    <line x1={494} y1={8} x2={494} y2={120} stroke={t.dark} strokeWidth={4} />
-    <rect x={484} y={120} width={20} height={24} fill={t.dark} />
+    <circle cx={176} cy={208} r={10} fill={t.dark} />
+    <line x1={494} y1={8} x2={494} y2={118} stroke={t.dark} strokeWidth={4} />
+    <rect x={483} y={116} width={22} height={22} fill={t.dark} />
+    <path d="M494 138 v12 a9 9 0 1 1 -9 9" fill="none" stroke={t.dark} strokeWidth={5} />
     {[96, 168, 360, 432].map((cx) => (
       <g key={cx}>
         <circle cx={cx} cy={300} r={30} fill={t.dark} />
-        <circle cx={cx} cy={300} r={11} fill={t.glass} />
+        <circle cx={cx} cy={300} r={13} fill={t.glass} />
+        <circle cx={cx} cy={300} r={4} fill={t.dark} />
       </g>
     ))}
+  </svg>
+);
+
+/** Operador de pé, com capacete, colete e controle remoto. */
+const Operator: React.FC<{ height: number }> = ({ height }) => (
+  <svg width={(height * 120) / 260} height={height} viewBox="0 0 120 260" style={{ display: 'block', overflow: 'visible' }}>
+    <rect x={36} y={172} width={20} height={74} fill={C.ink} />
+    <rect x={64} y={172} width={20} height={74} fill={C.ink} />
+    <rect x={30} y={240} width={28} height={12} fill={C.ink} />
+    <rect x={62} y={240} width={28} height={12} fill={C.ink} />
+    <rect x={30} y={92} width={60} height={88} fill={C.green} />
+    <rect x={34} y={96} width={52} height={80} fill={C.mint} />
+    <rect x={34} y={140} width={52} height={7} fill={C.white} />
+    <rect x={56} y={96} width={8} height={80} fill={C.green} />
+    <rect x={14} y={98} width={18} height={62} fill={C.green} />
+    <rect x={88} y={98} width={18} height={44} fill={C.green} />
+    <rect x={86} y={128} width={30} height={20} fill={C.ink} />
+    <rect x={108} y={112} width={3} height={16} fill={C.ink} />
+    <circle cx={60} cy={62} r={24} fill={C.surface} />
+    <circle cx={52} cy={64} r={3} fill={C.ink} />
+    <circle cx={68} cy={64} r={3} fill={C.ink} />
+    <path d="M34 56 a26 26 0 0 1 52 0 Z" fill={C.white} />
+    <rect x={30} y={53} width={60} height={6} fill={C.white} />
+  </svg>
+);
+
+/** Chave com etiqueta: entregar o bem (obrigação de dar). */
+const KeyArt: React.FC<{ width: number; color: string; tag: string }> = ({ width, color, tag }) => (
+  <svg width={width} height={(width * 120) / 220} viewBox="0 0 220 120" style={{ display: 'block' }}>
+    <circle cx={52} cy={60} r={30} fill="none" stroke={color} strokeWidth={14} />
+    <rect x={80} y={53} width={112} height={14} fill={color} />
+    <rect x={160} y={67} width={12} height={22} fill={color} />
+    <rect x={180} y={67} width={12} height={30} fill={color} />
+    <line x1={40} y1={36} x2={28} y2={8} stroke={color} strokeWidth={3} />
+    <rect x={8} y={0} width={30} height={20} fill={tag} transform="rotate(-18 23 10)" />
   </svg>
 );
 
@@ -441,7 +495,7 @@ const C1: React.FC = () => {
         </Box>
         <Box x={330} y={640} w={520} h={300} style={{ background: C.green, borderRadius: 4 }} />
         <Box x={250} y={470}>
-          <Crane width={600} t={CRANE_LIGHT} />
+          <Crane width={600} ground t={CRANE_LIGHT} />
         </Box>
       </Block>
     </Frame>
@@ -450,17 +504,36 @@ const C1: React.FC = () => {
 
 const C2: React.FC = () => (
   <Frame mode="dark" label={P.law.label} n={2} action={P.law.action}>
-    <Box x={M} y={220} w={W}>
-      <Law source={P.law.source} size={42}>
+    <Box x={M} y={210} w={W}>
+      <Law source={P.law.source} size={40}>
         <LawText />
       </Law>
     </Box>
-    <Block x={M} y={650} w={W} h={536} bg={C.mint} style={{ padding: '48px 52px' }}>
+    <Block x={M} y={516} w={432} h={250} bg={C.inkSoft} style={{ border: `2px solid ${C.lineDark}`, padding: '30px 64px 30px 30px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+      <div>
+        <Mono color={C.mint}>{P.law.give.k}</Mono>
+        <div style={{ fontFamily: FONT.sans, fontWeight: 900, fontSize: 44, lineHeight: 1.02, letterSpacing: -1.6, color: C.white, marginTop: 8 }}>{P.law.give.v}</div>
+      </div>
+      <div style={{ position: 'absolute', right: 70, top: 34 }}>
+        <KeyArt width={150} color={C.mint} tag={C.white} />
+      </div>
+    </Block>
+    <Block x={560} y={516} w={432} h={250} bg={C.inkSoft} style={{ border: `2px solid ${C.lineDark}`, padding: '30px 30px 30px 64px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+      <div>
+        <Mono color={C.alertSoft}>{P.law.make.k}</Mono>
+        <div style={{ fontFamily: FONT.sans, fontWeight: 900, fontSize: 44, lineHeight: 1.02, letterSpacing: -1.6, color: C.white, marginTop: 8 }}>{P.law.make.v}</div>
+      </div>
+      <Operator height={190} />
+    </Block>
+    <Box x={496} y={597} w={88} h={88} style={{ background: C.white, borderRadius: 4, border: `4px solid ${C.ink}`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: FONT.sans, fontWeight: 900, fontSize: 60, color: C.ink }}>
+      ≠
+    </Box>
+    <Block x={M} y={796} w={W} h={390} bg={C.mint} style={{ padding: '42px 48px' }}>
       <Mono color={C.ink}>{SV31.plainLabel}</Mono>
-      <div style={{ fontFamily: FONT.sans, fontWeight: 900, fontSize: 60, lineHeight: 1.14, letterSpacing: -2.2, color: C.ink, marginTop: 28 }}>
+      <div style={{ fontFamily: FONT.sans, fontWeight: 900, fontSize: 50, lineHeight: 1.14, letterSpacing: -1.8, color: C.ink, marginTop: 24 }}>
         <Plain
           hl={
-            <Chip bg={C.ink} fg={C.mint} size={60}>
+            <Chip bg={C.ink} fg={C.mint} size={50}>
               {SV31.plain.hl}
             </Chip>
           }
@@ -486,8 +559,15 @@ const C3: React.FC = () => {
         bg={yes ? C.mint : C.inkSoft}
         style={{ border: yes ? undefined : `2px solid ${C.lineDark}`, padding: 34, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}
       >
-        <div style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
-          <Crane width={368} t={yes ? { body: C.paper, boom: C.white, dark: C.ink, glass: C.lineDark } : { body: C.mutedDark, boom: C.white, dark: C.ink, glass: C.lineDark, operator: true }} />
+        <div style={{ flex: 1, position: 'relative' }}>
+          <div style={{ position: 'absolute', left: -6, top: 30 }}>
+            <Crane width={330} ground t={yes ? { body: C.paper, boom: C.white, dark: C.ink, glass: C.lineDark } : { body: C.mutedDark, boom: C.white, dark: C.ink, glass: C.lineDark, operator: true }} />
+          </div>
+          {yes ? null : (
+            <div style={{ position: 'absolute', right: -4, top: 128 }}>
+              <Operator height={200} />
+            </div>
+          )}
         </div>
         <div>
           <Mono color={fg}>{s.kicker}</Mono>
@@ -514,7 +594,7 @@ const C3: React.FC = () => {
       </Box>
       {panel('left')}
       {panel('right')}
-      <Box x={496} y={566} w={88} h={88} style={{ background: C.white, borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center', border: `4px solid ${C.ink}` }}>
+      <Box x={496} y={760} w={88} h={88} style={{ background: C.white, borderRadius: 4, display: 'flex', alignItems: 'center', justifyContent: 'center', border: `4px solid ${C.ink}` }}>
         <Mark2 kind="no" color={C.ink} size={56} />
       </Box>
     </Frame>
