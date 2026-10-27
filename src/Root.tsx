@@ -6,6 +6,7 @@ import { FEED } from './ds/feed';
 import { BANCAS_TRIBUTARIO_FRAMES, BancasTributario } from './ds/reels/BancasTributario';
 import { ESTUDANTE_BANCAS_FRAMES, EstudanteBancas } from './ds/motion/EstudanteBancas';
 import { RECEITA_2026_FRAMES, RECEITA_SCENE, RECEITA_TOTAL, Receita2026, Receita2026Capa } from './ds/motion/Receita2026';
+import { SV31_BOARD, Sv31Board } from './ds/posts/Sv31Mockups';
 import { STORY_LIST } from './ds/stories';
 import { loadFonts } from './fonts';
 import { Story } from './Story';
@@ -34,6 +35,9 @@ export const RemotionRoot: React.FC = () => (
     ))}
     {FEED.map(({ id, component }) => (
       <Still key={id} id={id} component={component} width={1080} height={1350} />
+    ))}
+    {(['A', 'B', 'C'] as const).map((d) => (
+      <Still key={d} id={`DS-SV31-MOCKUP-${d}`} component={() => <Sv31Board dir={d} />} width={SV31_BOARD.width} height={SV31_BOARD.height} />
     ))}
     <Composition id="DS-STORY-bancas-estudante" component={EstudanteBancas} {...base} durationInFrames={ESTUDANTE_BANCAS_FRAMES} defaultProps={{ guide: false, showInstagramUI: false }} />
     <Composition id="DS-STORY-bancas-estudante-guia" component={EstudanteBancas} {...base} durationInFrames={ESTUDANTE_BANCAS_FRAMES} defaultProps={{ guide: true, showInstagramUI: false }} />

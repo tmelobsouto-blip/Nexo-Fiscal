@@ -175,6 +175,10 @@ Cada layout recebe `mode` e sai nos dois modos (`-L` e `-D`), sem mudar a estrut
 - Status por marcador: quadrado cheio no destaque = confirmado; tracejado = previsão ou pendente; sólido na cor do texto = prazo.
 - Palavras com hífen (Analista-Tributário, Auditor-Fiscal) nunca quebram na linha.
 
+## 6.4 Direções exploratórias
+
+Para testar uma linguagem nova sem sair do sistema, monte a mesma peça em direções lado a lado e apresente em prancha (post no feed + todos os slides). Exemplo: [carrossel SV 31 em três direções](roteiros/carrossel-sv31-mockups.md). Referências externas entram como composição (blocos, ritmo, recorte), nunca como cor, degradê, sombra ou canto arredondado fora dos tokens.
+
 ## 7. Copy final e testes A/B
 
 Toda a copy publicada está em [`src/ds/copy.ts`](../src/ds/copy.ts).

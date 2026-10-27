@@ -129,7 +129,7 @@ export const SV31 = {
     { t: '.”' },
   ],
   plainLabel: 'Sem juridiquês · tradução direta',
-  plain: { a: 'Alugar um bem (', hl: 'obrigação de dar', b: ') não é prestar serviço (obrigação de fazer). Sem operador, não existe ISS.' },
+  plain: { a: 'Alugar um bem (', hl: 'obrigação de dar', b: ') não é prestar serviço (obrigação de fazer). Sem operador, não existe\u00a0ISS.' },
   action: 'Veja o Mapa Visual →',
 };
 
@@ -373,5 +373,45 @@ export const RECEITA_2026_FEED = {
     ],
     src: ['Portaria MGI nº 5.505/2026 · imprensa especializada'],
     action: 'Salve para acompanhar',
+  },
+};
+
+// Carrossel SV 31 (4 slides) em 3 direções visuais (A, B, C). Copy do post publicado; texto literal e tradução em SV31.
+export const SV31_POST = {
+  total: 4,
+  cover: {
+    label: 'Dia da Jurisprudência · STF',
+    tag: 'Súmula Vinculante 31 · ISSQN',
+    a: 'Locação de',
+    hl: 'bens móveis',
+    b: 'paga',
+    q: 'ISS?',
+    action: 'Veja a Súmula e o Mapa →',
+  },
+  law: { label: 'Súmula literal · SV 31 do STF', source: 'Texto literal da Súmula Vinculante 31', action: 'Veja o Mapa Visual →' },
+  map: {
+    label: 'Mapa visual · Súmula Vinculante 31',
+    kicker: 'Contrato de locação móvel',
+    title: 'Veículo, Máquina ou Guindaste',
+    sub: 'Distinção entre obrigação de dar vs. obrigação de fazer',
+    left: { kicker: 'Locação pura (sem\u00a0operador)', verdict: ['Não incide', 'ISS'], tag: 'SV 31 · STF' },
+    // VALIDAR: “com operador incide ISS” segue a leitura de que a SV 31 só alcança a locação dissociada de serviço;
+    // há divergência sobre contratos mistos. Considere citar o precedente no slide.
+    right: { kicker: 'Com operador / motorista', verdict: ['Incide', 'ISS'], tag: 'Há prestação de\u00a0serviço' },
+    action: 'Salve este Mapa →',
+  },
+  material: {
+    label: 'Por dentro do material · NEXO Fiscal',
+    a: 'Mapas Visuais +',
+    hl: 'Lei Seca traduzida',
+    b: 'na linha.',
+    badges: ['30 Mapas Visuais de Revisão', '112 Remissões Traduzidas na Linha'],
+    action: 'Baixe 20 págs grátis no link da bio →',
+  },
+  caption: 'DIA DA JURISPRUDÊNCIA (Súmula Vinculante 31 do STF): Locação de bens móveis paga ISS?',
+  directions: {
+    A: { name: 'Direção A · Noir técnico', note: 'Painel escuro, anéis concêntricos em linha fina e o número da súmula como ponto focal.' },
+    B: { name: 'Direção B · Blocos de cor', note: 'Blocos verdes, número gigante recortado e fichas em grade.' },
+    C: { name: 'Direção C · Recorte', note: 'Verde-destaque contra preto, objeto recortado e o “×” que separa os dois casos.' },
   },
 };
