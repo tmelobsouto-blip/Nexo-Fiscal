@@ -79,7 +79,8 @@ Arquivo: `reels/bancas-tributario/caption.txt` (passou no `caption.py`: 555 cara
 
 1. **Nome da fonte:** o vídeo cita “Questões de Direito Tributário · 7 bancas · últimos 5 anos · atualizado em 03/10/2026”. Se a base tem nome público (próprio ou de terceiros), troque `SOURCE.credit` em `src/data/tributario-bancas.ts`.
 2. **FAFIPA como banca do concurso-alvo:** o painel marca “do concurso”; confirme o concurso antes de dizer “prova FAFIPA” para o seu público.
-3. **Não usado de propósito:** a “estimativa 8,0% no plano FAFIPA” do painel (é modelo, não observação) e o intervalo de confiança 6,3–14,6% (bom para um carrossel de método, longo demais para o Reel).
+3. **Top 3 da FAFIPA (falas 11 e cena final):** calculado sobre as 17 linhas visíveis no print, de 92 assuntos ordenados pela média. Um assunto de média baixa pode pesar mais na FAFIPA e estar fora do print. Confirme no painel ordenando pela coluna FAFIPA.
+4. **Não usado de propósito:** a “estimativa 8,0% no plano FAFIPA” do painel (é modelo, não observação) e o intervalo de confiança 6,3–14,6% (bom para um carrossel de método, longo demais para o Reel).
 
 ## Gravação
 

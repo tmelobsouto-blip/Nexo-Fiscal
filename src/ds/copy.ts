@@ -175,3 +175,22 @@ export const STORIES = {
   },
   s5: { label: 'Amostra grátis', title: '20 páginas reais do material.', hint: 'Toque no link' },
 };
+
+// Story em vídeo: estudante perdido × auditor explica como cada banca cobra Direito Tributário.
+// Números vêm de src/data/tributario-bancas.ts; aqui fica só o texto.
+export const STORY_BANCAS = {
+  label: 'Direito Tributário · por banca',
+  hook: { count: '92', unit: 'assuntos', tail: 'de Direito Tributário.' },
+  student1: 'Por onde eu começo?',
+  mentor1: 'Depende da sua banca.',
+  rowsLabel: '1º assunto em cada banca',
+  mentor2: 'Cada banca tem seu 1º lugar.',
+  excluded: 'Cesgranrio fora da comparação: só 13 questões.',
+  focusLabel: 'Execução Fiscal · Lei nº 6.830/1980',
+  mentor3: 'Na FAFIPA, Execução Fiscal é 12,2%. No Cebraspe, 2,1%.',
+  student2: 'Então eu começo por aí!',
+  cta: { a: 'Qual é a', hl: 'sua banca?' },
+  // VALIDAR: o dono do perfil precisa responder cada caixa de pergunta com o top 3 da banca citada.
+  ctaSub: 'Responda na caixa abaixo. Eu te mando o top\u00a03\u00a0dela.',
+  sticker: 'Qual é a sua banca?',
+};

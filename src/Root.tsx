@@ -4,6 +4,7 @@ import { REEL_FRAMES, Reel796 } from './carousel01/Reel';
 import { CAROUSEL_SLIDES } from './carousel01/Slides';
 import { FEED } from './ds/feed';
 import { BANCAS_TRIBUTARIO_FRAMES, BancasTributario } from './ds/reels/BancasTributario';
+import { ESTUDANTE_BANCAS_FRAMES, EstudanteBancas } from './ds/motion/EstudanteBancas';
 import { STORY_LIST } from './ds/stories';
 import { loadFonts } from './fonts';
 import { Story } from './Story';
@@ -33,6 +34,9 @@ export const RemotionRoot: React.FC = () => (
     {FEED.map(({ id, component }) => (
       <Still key={id} id={id} component={component} width={1080} height={1350} />
     ))}
+    <Composition id="DS-STORY-bancas-estudante" component={EstudanteBancas} {...base} durationInFrames={ESTUDANTE_BANCAS_FRAMES} defaultProps={{ guide: false, showInstagramUI: false }} />
+    <Composition id="DS-STORY-bancas-estudante-guia" component={EstudanteBancas} {...base} durationInFrames={ESTUDANTE_BANCAS_FRAMES} defaultProps={{ guide: true, showInstagramUI: false }} />
+    <Composition id="DS-STORY-bancas-estudante-mockup" component={EstudanteBancas} {...base} durationInFrames={ESTUDANTE_BANCAS_FRAMES} defaultProps={{ guide: false, showInstagramUI: true }} />
     <Composition id="DS-REEL-bancas-tributario" component={BancasTributario} {...base} durationInFrames={BANCAS_TRIBUTARIO_FRAMES} defaultProps={{ showInstagramUI: false }} />
     <Composition id="DS-REEL-bancas-tributario-mockup" component={BancasTributario} {...base} durationInFrames={BANCAS_TRIBUTARIO_FRAMES} defaultProps={{ showInstagramUI: true }} />
     {STORY_LIST.map(({ id, component, frames }) => (

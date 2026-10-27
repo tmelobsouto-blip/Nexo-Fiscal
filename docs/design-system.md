@@ -147,6 +147,15 @@ Formato vertical nativo, animação curta (5–7 s), um objetivo por story, áre
 
 ---
 
+## 6.1 Motion: personagens e diálogo
+
+Para vídeos de diálogo (ex.: [story do estudante](roteiros/story-estudante-bancas.md)), use `src/ds/characters.tsx`:
+
+- `Person` (`student` | `mentor`): figuras planas em duas cores, sem sombra nem degradê. Estudante em cinza-verde (`mutedDark`), auditor em verde institucional com gola verde-destaque e óculos. Humor: `confused`, `neutral`, `surprised`, `happy`; `talking` anima a boca.
+- `Bubble`: balão com cantos de 4 px e rabicho para quem fala; branco para o estudante, verde-destaque para o auditor.
+- `Doubt`: pontos de interrogação que sobem; só para o personagem confuso.
+- O diálogo vai sempre nos balões (o story é visto sem som). Um balão por vez, no máximo duas linhas.
+
 ## 7. Copy final e testes A/B
 
 Toda a copy publicada está em [`src/ds/copy.ts`](../src/ds/copy.ts).

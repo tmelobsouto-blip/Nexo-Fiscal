@@ -8,9 +8,9 @@ const TOTAL = 5;
 const PAD_TOP = GRID.storySafeTop;
 const PAD_BOTTOM = 1920 - GRID.storySafeBottom;
 
-type Sticker = { kind: 'quiz' | 'link'; top: number; height: number };
+export type Sticker = { kind: 'quiz' | 'link' | 'question'; top: number; height: number; text?: string };
 
-const Guide: React.FC<{ sticker?: Sticker }> = ({ sticker }) => {
+export const Guide: React.FC<{ sticker?: Sticker }> = ({ sticker }) => {
   const hatch = 'repeating-linear-gradient(45deg, rgba(180,68,26,0.18) 0 14px, transparent 14px 28px)';
   return (
     <AbsoluteFill style={{ pointerEvents: 'none' }}>
@@ -43,7 +43,7 @@ const Guide: React.FC<{ sticker?: Sticker }> = ({ sticker }) => {
           }}
         >
           <span style={{ fontFamily: FONT.mono, fontSize: 18, letterSpacing: 2, color: C.alert, textTransform: 'uppercase' }}>
-            {sticker.kind === 'quiz' ? 'Figurinha Quiz (nativa)' : 'Figurinha Link (nativa)'}
+            {sticker.kind === 'quiz' ? 'Figurinha Quiz (nativa)' : sticker.kind === 'question' ? 'Figurinha Pergunta (nativa)' : 'Figurinha Link (nativa)'}
           </span>
           {sticker.kind === 'quiz' ? (
             <>
@@ -56,6 +56,11 @@ const Guide: React.FC<{ sticker?: Sticker }> = ({ sticker }) => {
                   </span>
                 ))}
               </div>
+            </>
+          ) : sticker.kind === 'question' ? (
+            <>
+              <span style={{ fontFamily: FONT.sans, fontWeight: 800, fontSize: 36, color: C.ink }}>{sticker.text}</span>
+              <span style={{ width: '100%', border: `2px solid ${C.line}`, padding: '18px 0', textAlign: 'center', fontFamily: FONT.sans, fontSize: 26, color: C.muted }}>Toque para responder</span>
             </>
           ) : (
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 12, fontFamily: FONT.sans, fontWeight: 800, fontSize: 30, color: '#2563EB' }}>
