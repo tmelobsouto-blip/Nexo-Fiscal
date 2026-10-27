@@ -12,7 +12,9 @@
     "test": "remotion still src/index.ts DS-T796-04-exemplo out/test/smoke.png",
     "validate": "npm run typecheck && npm run test",
     "bancas:beats": "python3 -I scripts/beats_json.py reels/bancas-tributario/script.txt src/ds/reels/bancas-tributario.beats.json --target 32",
-    "bancas:render": "remotion render src/index.ts DS-REEL-bancas-tributario exports/reels/DS-REEL-bancas-tributario.mp4"
+    "bancas:render": "remotion render src/index.ts DS-REEL-bancas-tributario exports/reels/DS-REEL-bancas-tributario.mp4",
+    "receita2026:trilha": "python3 -I scripts/receita-2026-trilha.py public/audio/receita-2026-trilha.mp3",
+    "receita2026:render": "node scripts/render-receita-2026.cjs --preview"
   },
   "dependencies": {
     "@fontsource/archivo-black": "5.3.0",

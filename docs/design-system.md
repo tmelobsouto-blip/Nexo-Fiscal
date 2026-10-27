@@ -156,6 +156,17 @@ Para vídeos de diálogo (ex.: [story do estudante](roteiros/story-estudante-ban
 - `Doubt`: pontos de interrogação que sobem; só para o personagem confuso.
 - O diálogo vai sempre nos balões (o story é visto sem som). Um balão por vez, no máximo duas linhas.
 
+## 6.2 Motion: plantão de notícias
+
+Para sequências de atualização de concurso (ex.: [Receita Federal 2026](roteiros/story-receita-2026.md), `src/ds/motion/Receita2026.tsx`):
+
+- Um card de 7 s por fato; 210 quadros, 14 batidas a 120 BPM, corte seco na batida. Sequências acima de 60 s saem em arquivos separados.
+- `TopBar` com o número do card na série (01/12…), legenda da narração palavra por palavra e linha “Fonte · …” em todo card que traz dado.
+- Faixa de notícias embaixo da área segura (y 1496–1556): etiqueta verde-destaque “Atualização” e fatos em mono rolando. Só fatos confirmados ou marcados como previsão.
+- “Luz” é cor sólida: a linha que percorre a tela é verde-destaque com a ponta branca, sem brilho, sombra ou degradê.
+- Previsão não confirmada usa selo tracejado branco. Terracota continua só para incidência, erro e pegadinha.
+- Números contam ou giram até o valor; o valor final fica parado por pelo menos 3 s.
+
 ## 7. Copy final e testes A/B
 
 Toda a copy publicada está em [`src/ds/copy.ts`](../src/ds/copy.ts).

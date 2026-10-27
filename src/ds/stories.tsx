@@ -8,7 +8,7 @@ const TOTAL = 5;
 const PAD_TOP = GRID.storySafeTop;
 const PAD_BOTTOM = 1920 - GRID.storySafeBottom;
 
-export type Sticker = { kind: 'quiz' | 'link' | 'question'; top: number; height: number; text?: string };
+export type Sticker = { kind: 'quiz' | 'link' | 'question' | 'poll'; top: number; height: number; text?: string; options?: string[] };
 
 export const Guide: React.FC<{ sticker?: Sticker }> = ({ sticker }) => {
   const hatch = 'repeating-linear-gradient(45deg, rgba(180,68,26,0.18) 0 14px, transparent 14px 28px)';
@@ -43,7 +43,13 @@ export const Guide: React.FC<{ sticker?: Sticker }> = ({ sticker }) => {
           }}
         >
           <span style={{ fontFamily: FONT.mono, fontSize: 18, letterSpacing: 2, color: C.alert, textTransform: 'uppercase' }}>
-            {sticker.kind === 'quiz' ? 'Figurinha Quiz (nativa)' : sticker.kind === 'question' ? 'Figurinha Pergunta (nativa)' : 'Figurinha Link (nativa)'}
+            {sticker.kind === 'quiz'
+              ? 'Figurinha Quiz (nativa)'
+              : sticker.kind === 'question'
+                ? 'Figurinha Pergunta (nativa)'
+                : sticker.kind === 'poll'
+                  ? 'Figurinha Enquete (nativa)'
+                  : 'Figurinha Link (nativa)'}
           </span>
           {sticker.kind === 'quiz' ? (
             <>
@@ -57,6 +63,14 @@ export const Guide: React.FC<{ sticker?: Sticker }> = ({ sticker }) => {
                 ))}
               </div>
             </>
+          ) : sticker.kind === 'poll' ? (
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, width: '100%' }}>
+              {(sticker.options ?? []).map((o) => (
+                <span key={o} style={{ border: `2px solid ${C.line}`, borderRadius: 30, padding: '18px 8px', textAlign: 'center', fontFamily: FONT.sans, fontWeight: 800, fontSize: 26, color: C.ink, background: C.white }}>
+                  {o.toUpperCase()}
+                </span>
+              ))}
+            </div>
           ) : sticker.kind === 'question' ? (
             <>
               <span style={{ fontFamily: FONT.sans, fontWeight: 800, fontSize: 36, color: C.ink }}>{sticker.text}</span>

@@ -194,3 +194,96 @@ export const STORY_BANCAS = {
   ctaSub: 'Responda na caixa abaixo. Eu te mando o top\u00a03\u00a0dela.',
   sticker: 'Qual é a sua banca?',
 };
+
+// Story “Receita Federal 2026 · banca e edital se aproximam” (12 cenas × 7 s).
+// Fatos conferidos em 27/10/2026 na imprensa especializada; o edital ainda não saiu. Links em docs/roteiros/story-receita-2026.md.
+export const RECEITA_2026 = {
+  label: 'Receita Federal 2026',
+  kicker: 'Atualização',
+  narration: [
+    'Atenção, concurseiro! O novo concurso da Receita Federal está avançando.',
+    'Dezessete propostas foram registradas no processo de escolha da banca organizadora.',
+    'E uma minuta de dispensa de licitação já foi registrada no processo.',
+    'O governo federal já autorizou 146 vagas para a Receita Federal.',
+    'São 116 vagas para analista-tributário e 30 para auditor-fiscal.',
+    'As remunerações iniciais, incluindo auxílio-alimentação, chegam a mais de 24 mil reais.',
+    'E atenção: os dois cargos exigem graduação, mas aceitam formação em qualquer área.',
+    'A expectativa divulgada pela Receita Federal é publicar o edital ainda em dezembro.',
+    'Pela autorização, o prazo para publicação se estende até o início de janeiro de 2027.',
+    'O planejamento prevê provas objetivas, discursivas, pesquisa de vida pregressa e curso de formação.',
+    'Esperar a publicação do edital pode custar um tempo precioso de preparação.',
+    'Quer acompanhar cada novidade do concurso? Siga a NEXO Fiscal.',
+  ],
+  ticker: [
+    '146 vagas autorizadas',
+    '116 Analista-Tributário',
+    '30 Auditor-Fiscal',
+    'Banca em definição',
+    'Edital previsto para dezembro · não confirmado',
+    'Prazo da autorização: início de janeiro de 2027',
+  ],
+  s01: { a: 'Receita', b: 'Federal', c: 'O edital está', hl: 'mais perto.' },
+  // 17 itens classificados como “Proposta” no processo; não provam 17 instituições diferentes (nomes não divulgados).
+  s02: { n: 17, a: 'Propostas', b: 'em análise', caption: 'Propostas registradas no processo', note: 'Nomes das instituições não divulgados', src: 'Processo de contratação da banca · SEI' },
+  // VALIDAR: datas lidas pela imprensa no SEI (envio de propostas até 30/09; minuta registrada em 20/10/2026).
+  s03: {
+    a: 'Novos documentos',
+    b: 'Contratação em andamento',
+    doc: 'Minuta de termo de dispensa de licitação',
+    stamp: 'Minuta',
+    steps: [
+      { d: 'até 30/09', l: 'Propostas' },
+      { d: '20/10', l: 'Minuta de dispensa' },
+      { d: 'próxima etapa', l: 'Definição da banca' },
+    ],
+    src: 'Processo de contratação da banca · SEI',
+  },
+  s04: { n: 146, a: 'Vagas autorizadas', seal: 'Autorização oficial', src: 'Portaria MGI nº 5.505/2026' },
+  s05: {
+    cards: [
+      { n: 116, role: 'Analista-Tributário' },
+      { n: 30, role: 'Auditor-Fiscal' },
+    ],
+    src: 'Portaria MGI nº 5.505/2026',
+  },
+  // VALIDAR: os valores batem com vencimento básico inicial da tabela de 2023 + auxílio-alimentação de R$ 1.192,00
+  // (22.921,71 + 1.192,00 e 12.735,99 + 1.192,00), sem o bônus de eficiência. Outra fonte cita R$ 23.847,76 para auditor.
+  // Confira a tabela vigente (reajustes de 2025/2026) e o valor do auxílio antes de publicar.
+  s06: {
+    rows: [
+      { role: 'Auditor', value: '24.113,71' },
+      { role: 'Analista', value: '13.927,99' },
+    ],
+    note: 'Valores iniciais brutos, incluindo auxílio-alimentação',
+    src: 'Imprensa especializada · out/2026',
+  },
+  s07: {
+    a: 'Nível superior',
+    b: 'Qualquer área',
+    courses: ['Direito', 'Engenharia', 'Administração', 'Contabilidade'],
+    note: 'Diploma de graduação reconhecida pelo MEC',
+    src: 'Lei nº 10.593/2002, art. 3º',
+  },
+  s08: { month: 'Dezembro', year: '2026', label: 'Previsão de edital', seal: 'Previsão — não confirmado', src: 'Previsão divulgada pela Receita Federal' },
+  // Portaria publicada em 03/07/2026; seis meses para o edital. A imprensa cita 3 ou 4/01/2027, por isso “início de janeiro”.
+  s09: {
+    title: 'Prazo da autorização',
+    a: 'Início de janeiro',
+    b: '2027',
+    marks: [
+      { d: 'Jul/2026', l: 'Autorização' },
+      { d: 'Dez/2026', l: 'Previsão do edital' },
+      { d: 'Jan/2027', l: 'Prazo' },
+    ],
+    src: 'Portaria MGI nº 5.505/2026 · prazo de 6 meses',
+  },
+  // VALIDAR: objetiva, discursiva e curso de formação constam do planejamento noticiado (e da Lei nº 10.593/2002, art. 3º, § 4º);
+  // a pesquisa de vida pregressa existiu no concurso anterior, mas não foi confirmada para 2026.
+  s10: {
+    cards: ['Objetiva', 'Discursiva', 'Vida pregressa', 'Curso de formação'],
+    note: 'Conforme planejamento; detalhes definitivos no edital',
+    src: 'Planejamento do concurso',
+  },
+  s11: { a: 'O edital ainda não saiu.', b: 'Sua preparação', hl: 'já começou?', poll: ['Já estou estudando', 'Vou começar'] },
+  s12: { a: 'Receita Federal 2026', b: 'Não perca as próximas atualizações.', cta: 'Siga para mais atualizações', brand: { a: 'NEXO', b: 'Fiscal' } },
+};
