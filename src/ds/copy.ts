@@ -300,3 +300,78 @@ export const RECEITA_2026 = {
     action: 'O que já se sabe →',
   },
 };
+
+// Posts de feed da Receita Federal 2026: 6 layouts, cada um em claro e escuro. Mesmos fatos do story (checados em 27/10/2026).
+export const RECEITA_2026_FEED = {
+  label: 'Receita Federal 2026 · Atualização',
+  updated: 'Atualizado em 27/10/2026',
+  headline: {
+    kicker: 'Banca e edital se aproximam',
+    title: ['Receita', 'Federal'],
+    year: '2026',
+    lead: 'O edital está mais perto.',
+    sub: '146 vagas autorizadas. Edital previsto para dezembro, ainda sem data oficial.',
+    src: ['Portaria MGI nº 5.505/2026 · processo SEI da banca'],
+    action: 'Siga para as próximas atualizações',
+  },
+  split: {
+    kicker: 'Vagas autorizadas',
+    n: '146',
+    parts: [
+      { n: 116, role: 'Analista-Tributário' },
+      { n: 30, role: 'Auditor-Fiscal' },
+    ],
+    note: 'Os dois cargos pedem nível superior em qualquer área.',
+    src: ['Portaria MGI nº 5.505/2026 · Lei nº 10.593/2002'],
+    action: 'Salve para acompanhar',
+  },
+  // VALIDAR: datas de 30/09 e 20/10 lidas pela imprensa no processo SEI.
+  timeline: {
+    title: 'Onde está o concurso',
+    steps: [
+      { d: 'Jul/2026', l: 'Concurso autorizado', s: 'Portaria MGI nº 5.505/2026', kind: 'done' },
+      { d: '30/09', l: 'Fim do envio de propostas', s: '17 propostas registradas no processo', kind: 'done' },
+      { d: '20/10', l: 'Minuta de dispensa de licitação', s: 'Registrada no SEI; banca ainda não anunciada', kind: 'done' },
+      { d: 'Dez/2026', l: 'Previsão do edital', s: 'Sem data oficial', kind: 'forecast' },
+      { d: 'Jan/2027', l: 'Prazo da autorização', s: 'Até o início de janeiro', kind: 'deadline' },
+    ],
+    src: ['Portaria MGI nº 5.505/2026 · SEI, via imprensa'],
+    action: 'Salve para acompanhar',
+  },
+  facts: {
+    yes: 'O que já se sabe',
+    yesItems: ['146 vagas: 116 Analista-Tributário e 30 Auditor-Fiscal', 'Nível superior em qualquer área', 'Edital até o início de janeiro de 2027', 'Minuta de dispensa de licitação registrada'],
+    no: 'O que ainda falta',
+    noItems: ['Qual será a banca', 'A data de publicação do edital', 'As regras definitivas da prova'],
+    src: ['Portaria MGI nº 5.505/2026 · SEI, via imprensa'],
+    action: 'Siga para saber primeiro',
+  },
+  // VALIDAR: “Etapas previstas” vem do planejamento noticiado; vida pregressa ficou de fora por não estar confirmada para 2026.
+  sheet: {
+    title: 'Ficha do concurso',
+    rows: [
+      ['Cargos', 'Analista-Tributário e Auditor-Fiscal'],
+      ['Vagas', '146 (116 + 30)'],
+      ['Escolaridade', 'Nível superior, qualquer área'],
+      ['Autorização', 'Portaria MGI nº 5.505/2026'],
+      ['Prazo do edital', 'Início de janeiro de 2027'],
+      ['Previsão', 'Dezembro de 2026, não confirmada'],
+      ['Banca', 'Em definição · 17 propostas'],
+      ['Etapas previstas', 'Objetiva, discursiva e curso\u00a0de\u00a0formação'],
+    ],
+    src: ['Portaria MGI nº 5.505/2026 · Lei nº 10.593/2002', 'Processo SEI e imprensa especializada'],
+    action: 'Salve a ficha',
+  },
+  question: {
+    a: 'O edital ainda não saiu.',
+    b: 'Sua preparação',
+    hl: 'já começou?',
+    stats: [
+      { n: '146', l: 'vagas autorizadas' },
+      { n: 'Dez/26', l: 'previsão do edital' },
+      { n: 'Jan/27', l: 'prazo da autorização' },
+    ],
+    src: ['Portaria MGI nº 5.505/2026 · imprensa especializada'],
+    action: 'Salve para acompanhar',
+  },
+};

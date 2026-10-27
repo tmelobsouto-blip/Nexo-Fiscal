@@ -167,6 +167,14 @@ Para sequências de atualização de concurso (ex.: [Receita Federal 2026](rotei
 - Previsão não confirmada usa selo tracejado branco. Terracota continua só para incidência, erro e pegadinha.
 - Números contam ou giram até o valor; o valor final fica parado por pelo menos 3 s.
 
+## 6.3 Posts de atualização (claro e escuro)
+
+Cada layout recebe `mode` e sai nos dois modos (`-L` e `-D`), sem mudar a estrutura (ex.: [posts Receita 2026](roteiros/posts-receita-2026.md)). Em notícia de concurso:
+
+- Linha “Atualizado em dd/mm/aaaa” + “Fonte: …” acima do rodapé, quebrando só entre fontes inteiras.
+- Status por marcador: quadrado cheio no destaque = confirmado; tracejado = previsão ou pendente; sólido na cor do texto = prazo.
+- Palavras com hífen (Analista-Tributário, Auditor-Fiscal) nunca quebram na linha.
+
 ## 7. Copy final e testes A/B
 
 Toda a copy publicada está em [`src/ds/copy.ts`](../src/ds/copy.ts).
