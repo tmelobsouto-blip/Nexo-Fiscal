@@ -4,7 +4,7 @@ import { InstagramChrome } from '../../components/InstagramChrome';
 import { RECEITA_2026 as T } from '../copy';
 import { Guide, Sticker } from '../stories';
 import { C, FONT, GRID } from '../tokens';
-import { Canvas, Footer, Label, MotionOn, TopBar } from '../ui';
+import { Canvas, Footer, Hl, Label, MotionOn, Rule, TopBar } from '../ui';
 
 // 12 cenas de 7 s a 30 fps. Cada cena é um card de story; o vídeo completo é só a pré-visualização.
 export const RECEITA_SCENE = 210;
@@ -1064,5 +1064,46 @@ export const Receita2026: React.FC<Receita2026Props> = ({ scene = 0, guide, show
       {guide ? <GuideLayer from={from} /> : null}
       {showInstagramUI ? <InstagramChrome /> : null}
     </MotionOn>
+  );
+};
+
+export const Receita2026Capa: React.FC = () => {
+  const K = T.cover;
+  return (
+    <Canvas mode="light" padTop={GRID.storySafeTop} padBottom={1920 - GRID.storySafeBottom}>
+      <TopBar label={`${T.label} · ${T.kicker}`} />
+      <At top={372}>
+        <Label color={C.green}>{K.kicker}</Label>
+      </At>
+      <At top={424}>
+        {K.title.map((w) => (
+          <Big key={w} size={190} color={C.ink} style={{ marginBottom: 6 }}>
+            {w}
+          </Big>
+        ))}
+        <Big size={190} color={C.green}>
+          {K.year}
+        </Big>
+      </At>
+      <At top={958}>
+        <div style={{ fontFamily: FONT.sans, fontWeight: 800, fontSize: 58, letterSpacing: -2, color: C.ink }}>
+          O edital está <Hl marker>mais perto.</Hl>
+        </div>
+      </At>
+      <At top={1068}>
+        {K.stats.map((x, i) => (
+          <React.Fragment key={x.n}>
+            {i > 0 ? <Rule /> : null}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 30, padding: '20px 0' }}>
+              <div style={{ width: 210, flexShrink: 0, fontFamily: FONT.sans, fontWeight: 900, fontSize: 76, lineHeight: 1, letterSpacing: -3, color: C.green, textTransform: 'uppercase' }}>{x.n}</div>
+              <div style={{ fontFamily: FONT.sans, fontWeight: 600, fontSize: 30, lineHeight: 1.22, letterSpacing: -0.4, color: C.ink }}>{x.l}</div>
+            </div>
+          </React.Fragment>
+        ))}
+      </At>
+      <At top={1516}>
+        <Footer action={K.action} />
+      </At>
+    </Canvas>
   );
 };

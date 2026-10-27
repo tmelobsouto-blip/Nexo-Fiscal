@@ -5,7 +5,7 @@ import { CAROUSEL_SLIDES } from './carousel01/Slides';
 import { FEED } from './ds/feed';
 import { BANCAS_TRIBUTARIO_FRAMES, BancasTributario } from './ds/reels/BancasTributario';
 import { ESTUDANTE_BANCAS_FRAMES, EstudanteBancas } from './ds/motion/EstudanteBancas';
-import { RECEITA_2026_FRAMES, RECEITA_SCENE, RECEITA_TOTAL, Receita2026 } from './ds/motion/Receita2026';
+import { RECEITA_2026_FRAMES, RECEITA_SCENE, RECEITA_TOTAL, Receita2026, Receita2026Capa } from './ds/motion/Receita2026';
 import { STORY_LIST } from './ds/stories';
 import { loadFonts } from './fonts';
 import { Story } from './Story';
@@ -43,6 +43,7 @@ export const RemotionRoot: React.FC = () => (
     {Array.from({ length: RECEITA_TOTAL }, (_, i) => String(i + 1).padStart(2, '0')).map((n) => (
       <Composition key={n} id={`DS-STORY-receita-2026-${n}`} component={Receita2026} {...base} durationInFrames={RECEITA_SCENE} defaultProps={{ scene: Number(n) }} />
     ))}
+    <Still id="DS-STORY-receita-2026-capa" component={Receita2026Capa} width={1080} height={1920} />
     <Composition id="DS-STORY-receita-2026-11-guia" component={Receita2026} {...base} durationInFrames={RECEITA_SCENE} defaultProps={{ scene: 11, guide: true }} />
     <Composition id="DS-REEL-bancas-tributario" component={BancasTributario} {...base} durationInFrames={BANCAS_TRIBUTARIO_FRAMES} defaultProps={{ showInstagramUI: false }} />
     <Composition id="DS-REEL-bancas-tributario-mockup" component={BancasTributario} {...base} durationInFrames={BANCAS_TRIBUTARIO_FRAMES} defaultProps={{ showInstagramUI: true }} />

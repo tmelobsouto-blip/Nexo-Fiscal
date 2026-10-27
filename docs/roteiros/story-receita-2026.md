@@ -5,7 +5,7 @@
 | Formato | 12 stories em vídeo 1080 × 1920, 7 s cada (84 s no total), 30 fps |
 | Estilo | Plantão de notícias no sistema NEXO: fundo escuro, verde-destaque nos números, faixa de notícias rolando embaixo |
 | Objetivo | Alcance e retenção na sequência; enquete no card 11; seguir no card 12 |
-| Composições | `DS-STORY-receita-2026-01` … `-12` (publicar) · `-11-guia` (posição da enquete) · `DS-STORY-receita-2026` (prévia de 84 s) · `-mockup` (com a interface do Instagram) |
+| Composições | `DS-STORY-receita-2026-01` … `-12` (publicar) · `-capa` (capa clara do post) · `-11-guia` (posição da enquete) · `DS-STORY-receita-2026` (prévia de 84 s) · `-mockup` (com a interface do Instagram) |
 | Código | `src/ds/motion/Receita2026.tsx` · texto e narração em `RECEITA_2026` (`src/ds/copy.ts`) · trilha em `scripts/receita-2026-trilha.py` |
 | Arquivos | `exports/stories/receita-2026/` (12 MP4, guia da enquete e folha de contato `-folha.png`) · prévia completa em `out/DS-STORY-receita-2026.mp4` |
 
@@ -47,6 +47,8 @@ Renderizar tudo de novo (12 cards, guia e prévia): `npm run receita2026:render`
 2. No **card 11**, adicione a **figurinha de enquete** sem pergunta (a pergunta já está na tela), com as opções “JÁ ESTOU ESTUDANDO” e “VOU COMEÇAR”, na área marcada em `DS-STORY-receita-2026-11-guia.png` (centro, entre y 790 e y 1010).
 3. No card 12, se quiser, adicione a figurinha de menção ao @nexofiscalbr logo abaixo da marca.
 4. Fixe a sequência num destaque “Receita 2026” e atualize quando a banca sair.
+
+**Capa (feed ou Reel com o vídeo completo).** O 1º quadro do vídeo é a tela preta do gancho, então a capa automática sai escura. Ao postar, toque em **Editar capa → Adicionar da galeria** e escolha `exports/stories/receita-2026/DS-STORY-receita-2026-capa.jpg` (1080 × 1920, fundo claro). Todo o conteúdo fica dentro do recorte 3:4 da grade do perfil (y 240 a 1680). Texto da capa em `RECEITA_2026.cover` (`src/ds/copy.ts`); composição `DS-STORY-receita-2026-capa`.
 
 ## Checagem dos fatos (27/10/2026)
 

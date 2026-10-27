@@ -286,4 +286,17 @@ export const RECEITA_2026 = {
   },
   s11: { a: 'O edital ainda não saiu.', b: 'Sua preparação', hl: 'já começou?', poll: ['Já estou estudando', 'Vou começar'] },
   s12: { a: 'Receita Federal 2026', b: 'Não perca as próximas atualizações.', cta: 'Siga para mais atualizações', brand: { a: 'NEXO', b: 'Fiscal' } },
+  // Capa clara para o post (o 1º quadro do vídeo é a tela preta do gancho).
+  cover: {
+    kicker: 'Banca e edital se aproximam',
+    title: ['Receita', 'Federal'],
+    year: '2026',
+    lead: 'O edital está mais perto.',
+    stats: [
+      { n: '146', l: 'vagas autorizadas' },
+      { n: '17', l: 'propostas registradas no processo da banca' },
+      { n: 'Dez', l: 'previsão do edital, não confirmada' },
+    ],
+    action: 'O que já se sabe →',
+  },
 };
