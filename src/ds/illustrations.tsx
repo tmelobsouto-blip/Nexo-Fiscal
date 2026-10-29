@@ -90,3 +90,102 @@ export const KeyArt: React.FC<{ width: number; color: string; tag: string }> = (
     <rect x={8} y={0} width={30} height={20} fill={tag} transform="rotate(-18 23 10)" />
   </svg>
 );
+
+export type StoreTone = { body: string; dark: string; glass: string; sign: string; signText: string; awning: [string, string] };
+
+/** Loja/estabelecimento com placa (MATRIZ, FILIAL...). */
+export const Store: React.FC<{ width: number; label: string; t: StoreTone }> = ({ width, label, t }) => (
+  <svg width={width} height={(width * 230) / 240} viewBox="0 0 240 230" style={{ display: 'block', overflow: 'visible' }}>
+    <rect x={12} y={60} width={216} height={170} fill={t.body} />
+    <rect x={0} y={48} width={240} height={16} fill={t.dark} />
+    <rect x={34} y={6} width={172} height={44} fill={t.sign} />
+    <text x={120} y={36} textAnchor="middle" fontFamily={FONT.mono} fontWeight={600} fontSize={21} letterSpacing={3} fill={t.signText}>
+      {label.toUpperCase()}
+    </text>
+    {Array.from({ length: 8 }).map((_, i) => (
+      <rect key={i} x={12 + i * 27} y={64} width={27} height={22} fill={t.awning[i % 2]} />
+    ))}
+    <rect x={30} y={106} width={60} height={52} fill={t.glass} />
+    <rect x={150} y={106} width={60} height={52} fill={t.glass} />
+    <rect x={58} y={106} width={4} height={52} fill={t.dark} fillOpacity={0.4} />
+    <rect x={178} y={106} width={4} height={52} fill={t.dark} fillOpacity={0.4} />
+    <rect x={96} y={140} width={48} height={90} fill={t.dark} />
+    <rect x={132} y={182} width={6} height={12} fill={t.glass} />
+  </svg>
+);
+
+/** Caixa de mercadoria com fita. */
+export const Crate: React.FC<{ width: number; dark?: string; tape?: string }> = ({ width, dark = C.ink, tape = C.green }) => (
+  <svg width={width} height={(width * 90) / 100} viewBox="0 0 100 90" style={{ display: 'block', overflow: 'visible' }}>
+    <rect x={3} y={3} width={94} height={84} fill={C.paper} stroke={dark} strokeWidth={5} />
+    <rect x={42} y={3} width={16} height={84} fill={tape} />
+    <rect x={12} y={60} width={22} height={14} fill={dark} fillOpacity={0.25} />
+  </svg>
+);
+
+/** Caminhão-baú. `label` escreve na lateral do baú; sem label, mostra uma caixa. */
+export const Truck: React.FC<{ width: number; cargo?: string; cab?: string; dark?: string; glass?: string; label?: string; moving?: boolean }> = ({
+  width,
+  cargo = C.white,
+  cab = C.mint,
+  dark = C.ink,
+  glass = C.lineDark,
+  label,
+  moving,
+}) => (
+  <svg width={width} height={(width * 190) / 360} viewBox="0 0 360 190" style={{ display: 'block', overflow: 'visible' }}>
+    {moving
+      ? [40, 70, 100].map((y, i) => <rect key={y} x={-70 + i * 14} y={y} width={52 - i * 10} height={6} fill={dark} fillOpacity={0.5} />)
+      : null}
+    <rect x={0} y={18} width={232} height={122} fill={cargo} />
+    <rect x={0} y={18} width={232} height={8} fill={dark} fillOpacity={0.15} />
+    {label ? (
+      <>
+        <rect x={20} y={56} width={192} height={46} fill={dark} />
+        <text x={116} y={86} textAnchor="middle" fontFamily={FONT.mono} fontWeight={600} fontSize={19} letterSpacing={2.4} fill={C.mint}>
+          {label.toUpperCase()}
+        </text>
+      </>
+    ) : (
+      <g transform="translate(84 40)">
+        <rect x={0} y={0} width={64} height={58} fill={C.paper} stroke={dark} strokeWidth={4} />
+        <rect x={26} y={0} width={12} height={58} fill={C.green} />
+      </g>
+    )}
+    <polygon points="238,56 300,56 338,98 344,140 238,140" fill={cab} />
+    <polygon points="252,68 296,68 322,98 252,98" fill={glass} />
+    <rect x={336} y={124} width={16} height={16} fill={dark} />
+    <rect x={0} y={138} width={350} height={12} fill={dark} />
+    {[58, 172, 290].map((cx) => (
+      <g key={cx}>
+        <circle cx={cx} cy={156} r={27} fill={dark} />
+        <circle cx={cx} cy={156} r={10} fill={glass} />
+      </g>
+    ))}
+  </svg>
+);
+
+/** Chave liga/desliga (opção do contribuinte). */
+export const Toggle: React.FC<{ width: number; on: boolean; dark?: string }> = ({ width, on, dark = C.ink }) => (
+  <svg width={width} height={(width * 100) / 220} viewBox="0 0 220 100" style={{ display: 'block' }}>
+    <rect x={2} y={10} width={216} height={80} fill={on ? C.green : C.lineDark} stroke={dark} strokeWidth={4} />
+    <rect x={on ? 128 : 12} y={20} width={80} height={60} fill={C.white} stroke={dark} strokeWidth={4} />
+    <text x={on ? 64 : 160} y={62} textAnchor="middle" fontFamily={FONT.sans} fontWeight={900} fontSize={30} fill={C.white}>
+      {on ? 'SIM' : 'NÃO'}
+    </text>
+  </svg>
+);
+
+/** Tíquete de crédito com marca de mantido. */
+export const CreditTag: React.FC<{ width: number; label: string; bg: string; dark?: string }> = ({ width, label, bg, dark = C.ink }) => (
+  <svg width={width} height={(width * 110) / 220} viewBox="0 0 220 110" style={{ display: 'block' }}>
+    <rect x={0} y={0} width={220} height={110} fill={C.paper} stroke={dark} strokeWidth={4} />
+    <circle cx={0} cy={55} r={14} fill={bg} />
+    <circle cx={220} cy={55} r={14} fill={bg} />
+    <line x1={160} y1={8} x2={160} y2={102} stroke={dark} strokeWidth={3} strokeDasharray="8 7" />
+    <text x={26} y={66} fontFamily={FONT.mono} fontWeight={600} fontSize={22} letterSpacing={2.6} fill={dark}>
+      {label.toUpperCase()}
+    </text>
+    <path d="M174 56 l12 12 l20 -24" fill="none" stroke={C.green} strokeWidth={8} strokeLinecap="square" />
+  </svg>
+);

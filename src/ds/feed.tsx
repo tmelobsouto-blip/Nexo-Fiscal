@@ -3,6 +3,7 @@ import { AbsoluteFill } from 'remotion';
 import { QUESTAO, SV31, TEMA796 } from './copy';
 import { RECEITA_2026_POSTS } from './posts/Receita2026Feed';
 import { SV31_MOCKUP_SLIDES } from './posts/Sv31Mockups';
+import { ICMS_TRANSF_SLIDES } from './posts/IcmsTransferencia';
 import { C, FONT, GRID } from './tokens';
 import { Br, Canvas, Fill, Footer, Hl, Icon, Label, Law, Mark, Rule, SplitBar, Stat, Tag, TemplateBadge, Text, TopBar, Warn } from './ui';
 
@@ -472,4 +473,5 @@ export const FEED = [
   { id: 'DS-MODELO-ranking-incidencia', component: RankingTemplate },
   ...RECEITA_2026_POSTS,
   ...SV31_MOCKUP_SLIDES,
+  ...ICMS_TRANSF_SLIDES,
 ];

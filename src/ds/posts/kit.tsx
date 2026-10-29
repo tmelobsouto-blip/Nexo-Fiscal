@@ -56,3 +56,28 @@ export const Block: React.FC<{ x: number; y: number; w: number; h: number; bg?: 
     {children}
   </Box>
 );
+
+// Mockup do feed (fora da arte): miniaturas e ícones do Instagram.
+export const Scaled: React.FC<{ S: React.FC; w: number }> = ({ S, w }) => {
+  const s = w / 1080;
+  return (
+    <div style={{ position: 'relative', width: w, height: 1350 * s, overflow: 'hidden', borderRadius: 4, flexShrink: 0 }}>
+      <div style={{ position: 'absolute', left: 0, top: 0, width: 1080, height: 1350, transform: `scale(${s})`, transformOrigin: '0 0' }}>
+        <S />
+      </div>
+    </div>
+  );
+};
+
+export const IgIcon: React.FC<{ d: string; color: string }> = ({ d, color }) => (
+  <svg width={40} height={40} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={1.9} strokeLinejoin="round" strokeLinecap="round">
+    <path d={d} />
+  </svg>
+);
+
+export const IG = {
+  heart: 'M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z',
+  comment: 'M20 11.5a8 8 0 1 1-3.2-6.4A8 8 0 0 1 20 11.5zM20 20l-3-2.6',
+  send: 'M21 4L3 11l7 3 3 7 8-17zM10 14l11-10',
+  save: 'M6 3h12v18l-6-4.5L6 21z',
+};

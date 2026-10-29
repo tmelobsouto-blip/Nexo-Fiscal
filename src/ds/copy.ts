@@ -421,3 +421,108 @@ export const SV31_POST = {
     C: { name: 'Direção C · Recorte', note: 'Verde-destaque contra preto, objeto recortado e o “×” que separa os dois casos.' },
   },
 };
+
+// Carrossel “Matriz → filial paga ICMS?” (8 slides, direção C). Conferido em 29/10/2026.
+// Fontes: Súmula 166 do STJ; ADC 49 (STF, mérito em 2021, embargos em 2023 com efeitos a partir de 2024);
+// LC 87/1996, art. 12, §§ 4º e 5º, incluídos pela LC 204/2023 (§ 5º promulgado após a derrubada do veto, DOU 13/06/2024).
+export const ICMS_TRANSF = {
+  total: 8,
+  label: 'ICMS · Lei Kandir',
+  cover: {
+    tag: 'Súmula 166 STJ · ADC 49 · LC 204/2023',
+    lines: ['Matriz →', 'filial paga'],
+    q: 'ICMS?',
+    promise: 'A resposta mudou em 2024.',
+    action: 'Arraste →',
+  },
+  answer: {
+    kicker: 'Resposta curta',
+    a: 'Regra:',
+    hl: 'não paga.',
+    body: 'Matriz e filial têm o mesmo dono. A mercadoria muda de endereço, não de titular.',
+    badge: 'Mesmo titular',
+    stores: ['Matriz', 'Filial'],
+    action: 'Por quê →',
+  },
+  why: {
+    label: 'Súmula 166 do STJ · literal',
+    source: 'Súmula 166 do STJ',
+    law: [
+      { t: '“' },
+      { t: 'Não constitui fato gerador do ICMS', mark: true },
+      { t: ' o simples deslocamento de mercadoria de um para outro estabelecimento do ' },
+      { t: 'mesmo contribuinte', mark: true },
+      { t: '.”' },
+    ],
+    left: { k: 'Circulação física', v: 'Muda de lugar', verdict: 'Não incide' },
+    right: { k: 'Circulação jurídica', v: 'Muda de dono', verdict: 'Incide' },
+    plainLabel: 'Sem juridiquês',
+    plain: 'ICMS exige que a mercadoria mude de dono. Trocar de endereço não basta.',
+    action: 'Como virou lei →',
+  },
+  timeline: {
+    label: 'Linha do tempo',
+    title: 'De súmula a lei',
+    steps: [
+      { y: '1996', who: 'STJ', l: 'Súmula 166', s: 'Transferência não é fato gerador' },
+      { y: '2021', who: 'STF', l: 'ADC 49', s: 'Inconstitucional cobrar na transferência' },
+      { y: '2023', who: 'STF', l: 'Embargos na ADC 49', s: 'Efeitos a partir de 2024' },
+      { y: '2023', who: 'Congresso', l: 'LC 204/2023', s: 'Regra vira lei: art. 12, § 4º' },
+      { y: '2024', who: 'Congresso', l: 'Veto derrubado', s: 'Promulgado o § 5º: a opção', hot: true },
+    ],
+    action: 'As 2 pegadinhas →',
+  },
+  trap1: {
+    kicker: 'Pegadinha 1',
+    title: 'O crédito não se perde.',
+    source: 'LC 87/1996, art. 12, § 4º (LC 204/2023)',
+    law: [
+      { t: '“' },
+      { t: 'Não se considera ocorrido o fato gerador', mark: true },
+      { t: ' do imposto na saída de mercadoria de estabelecimento para outro de mesma titularidade, ' },
+      { t: 'mantendo-se o crédito', mark: true },
+      { t: ' relativo às operações e prestações anteriores em favor do contribuinte (...)”' },
+    ],
+    wrong: 'A transferência obriga a estornar o crédito.',
+    right: 'O crédito das operações anteriores fica com o contribuinte.',
+    tag: 'Crédito',
+    action: 'Pegadinha 2 →',
+  },
+  trap2: {
+    kicker: 'Pegadinha 2',
+    title: ['Pode ser tributada.', 'Se o contribuinte quiser.'],
+    source: 'LC 87/1996, art. 12, § 5º (veto derrubado em 2024)',
+    law: [
+      { t: '“Alternativamente ao disposto no § 4º deste artigo, ' },
+      { t: 'por opção do contribuinte', mark: true },
+      { t: ', a transferência de mercadoria para estabelecimento pertencente ao mesmo titular ' },
+      { t: 'poderá ser equiparada a operação sujeita à ocorrência do fato gerador', mark: true },
+      { t: ' de imposto (...)”' },
+    ],
+    toggle: 'Tributar a transferência',
+    toggleOn: 'Opção do contribuinte',
+    wrong: 'A transferência nunca pode ser tributada.',
+    right: 'Desde 2024 pode, por opção do contribuinte. Não é escolha do Fisco.',
+    action: 'Cola de prova →',
+  },
+  recap: {
+    title: 'Cola de prova',
+    sub: 'Matriz → filial · ICMS',
+    rows: [
+      { k: 'Mesmo titular', v: 'Não é fato gerador', s: 'Súmula 166 · art. 12, § 4º' },
+      { k: 'Crédito anterior', v: 'Mantido com o\u00a0contribuinte', s: 'art. 12, § 4º' },
+      { k: 'Opção', v: 'Pode equiparar a operação\u00a0tributada', s: 'art. 12, § 5º' },
+      { k: 'Outro titular', v: 'Venda: incide ICMS', s: 'circulação jurídica' },
+      { k: 'ADC 49', v: 'Efeitos a partir de 2024', s: 'embargos, 2023' },
+    ],
+    action: 'Último slide →',
+  },
+  cta: {
+    a: 'Pode transferir.',
+    hl: 'Aqui não incide\u00a0ICMS.',
+    sub: 'Mande este post para quem estuda Lei Kandir.',
+    cargo: 'Cola de prova',
+    action: 'Enviar →',
+  },
+  caption: 'Matriz manda mercadoria para a filial. Paga ICMS?',
+};
