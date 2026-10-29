@@ -137,7 +137,7 @@ export const MATERIAL = {
   name: 'Reta Final ISS Curitiba',
   url: 'nexofiscalbr.com.br/amostra',
   sample: '20 páginas reais do material',
-  // VALIDAR: V01 mostra 273 questões inéditas; V03 mostra 272 no 1º quadro e 273 no seguinte.
+  // A página de vendas (29/10/2026) mostra 273 questões inéditas; o V03 antigo mostrava 272 no 1º quadro.
   kpis: [
     { value: '279', unit: 'pág.', label: 'Manuais temáticos' },
     { value: '112', unit: '', label: 'Remissões na linha' },
@@ -494,4 +494,30 @@ export const ICMS_TRANSF = {
   },
   next: '→',
   caption: 'Matriz manda mercadoria para a filial. Paga ICMS?',
+};
+
+// Post de divulgação do Reta Final ISS Curitiba (2 slides, versão limpa). Dados da página de vendas em 29/10/2026.
+export const RETA_FINAL_ISS = {
+  cover: {
+    lines: ['Chegou a', 'reta final do'],
+    hl: 'ISS Curitiba.',
+    sub: 'Atualizado com as LCs 146, 148 e\u00a0149/2025.',
+    stats: [
+      { n: '279', l: 'páginas' },
+      { n: '273', l: 'questões inéditas' },
+      { n: '112', l: 'remissões traduzidas na\u00a0linha' },
+    ],
+    book: { brand: 'NEXO Fiscal', a: 'Reta Final', b: 'ISS Curitiba.', author: 'Tiago Souto' },
+  },
+  offer: {
+    a: 'A legislação mudou.',
+    b: 'A revisão precisa\u00a0acompanhar.',
+    // Questão Q5 do material, literal.
+    q: { id: 'Q5', tag: '(Inédita)', text: 'Segundo o STF, a lista municipal pode prever ISS sobre a locação de bens móveis, desde que haja lei complementar nacional autorizando.', opts: '( ) Certo · ( ) Errado', key: 'Errado', why: 'Súmula Vinculante 31: a incidência é inconstitucional.' },
+    items: ['273 questões inéditas no padrão FAFIPA', 'Lei seca com 112 remissões traduzidas na\u00a0linha', 'Comentário alternativa por\u00a0alternativa'],
+    price: 'R$ 39,90',
+    pay: 'Cartão ou Pix à vista',
+    cta: 'Link na bio',
+  },
+  caption: 'Chegou a reta final do ISS Curitiba: questões inéditas e a legislação atualizada pelas LCs 146, 148 e 149/2025.',
 };

@@ -189,3 +189,32 @@ export const CreditTag: React.FC<{ width: number; label: string; bg: string; dar
     <path d="M174 56 l12 12 l20 -24" fill="none" stroke={C.green} strokeWidth={8} strokeLinecap="square" />
   </svg>
 );
+
+/** Capa do material em pé, com o bloco de páginas à direita. */
+export const Book: React.FC<{ width: number; brand: string; a: string; b: string; author: string }> = ({ width, brand, a, b, author }) => (
+  <svg width={width} height={(width * 400) / 300} viewBox="0 0 300 400" style={{ display: 'block', overflow: 'visible' }}>
+    <polygon points="272,8 292,18 292,398 272,392" fill={C.paper} stroke={C.ink} strokeWidth={3} />
+    {[60, 120, 180, 240, 300, 360].map((y) => (
+      <line key={y} x1={276} y1={y} x2={290} y2={y + 4} stroke={C.line} strokeWidth={2} />
+    ))}
+    <rect x={0} y={0} width={272} height={392} fill={C.ink} stroke={C.lineDark} strokeWidth={3} />
+    <rect x={14} y={16} width={6} height={360} fill={C.mint} />
+    <text x={36} y={42} fontFamily={FONT.sans} fontWeight={800} fontSize={15} fill={C.white}>
+      {brand}
+    </text>
+    <rect x={36} y={54} width={212} height={2} fill={C.lineDark} />
+    <text x={36} y={184} fontFamily={FONT.sans} fontWeight={900} fontSize={33} letterSpacing={-1.2} fill={C.white}>
+      {a}
+    </text>
+    <text x={36} y={222} fontFamily={FONT.sans} fontWeight={900} fontSize={33} letterSpacing={-1.2} fill={C.mint}>
+      {b}
+    </text>
+    {[246, 260, 274].map((y, i) => (
+      <rect key={y} x={36} y={y} width={[196, 180, 120][i]} height={6} fill={C.lineDark} />
+    ))}
+    <rect x={36} y={338} width={212} height={2} fill={C.lineDark} />
+    <text x={36} y={362} fontFamily={FONT.sans} fontWeight={700} fontSize={14} fill={C.white}>
+      {author}
+    </text>
+  </svg>
+);
