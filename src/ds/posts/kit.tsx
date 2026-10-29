@@ -23,12 +23,23 @@ export const Mono: React.FC<{ color: string; size?: number; style?: React.CSSPro
 );
 
 /** Frame: TopBar e Footer sempre por cima do fundo; o conteúdo vem posicionado. */
-export const Frame: React.FC<{ mode: Mode; label: string; n: number; total: number; action: string; bg?: React.ReactNode; children: React.ReactNode }> = ({ mode, label, n, total, action, bg, children }) => (
+/** Sem `label`, o slide sai limpo: sem TopBar, só o rodapé. */
+export const Frame: React.FC<{ mode: Mode; label?: string; n?: number; total?: number; action?: string; bg?: React.ReactNode; children: React.ReactNode }> = ({
+  mode,
+  label,
+  n,
+  total,
+  action,
+  bg,
+  children,
+}) => (
   <Canvas mode={mode}>
     {bg}
-    <div style={{ position: 'relative' }}>
-      <TopBar label={label} index={n} total={total} />
-    </div>
+    {label ? (
+      <div style={{ position: 'relative' }}>
+        <TopBar label={label} index={n} total={total} />
+      </div>
+    ) : null}
     <div style={{ flex: 1 }} />
     <div style={{ position: 'relative' }}>
       <Footer action={action} />

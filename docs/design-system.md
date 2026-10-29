@@ -179,6 +179,10 @@ Cada layout recebe `mode` e sai nos dois modos (`-L` e `-D`), sem mudar a estrut
 
 Para testar uma linguagem nova sem sair do sistema, monte a mesma peça em direções lado a lado e apresente em prancha (post no feed + todos os slides). Exemplo: [carrossel SV 31 em três direções](roteiros/carrossel-sv31-mockups.md). Referências externas entram como composição (blocos, ritmo, recorte), nunca como cor, degradê, sombra ou canto arredondado fora dos tokens.
 
+## 6.5 Carrossel limpo
+
+Variante pedida pelo dono do perfil (carrossel [ICMS matriz → filial](roteiros/carrossel-icms-transferencia.md)): sem `TopBar` e sem rótulos auxiliares; só título, conteúdo, ilustração e o rodapé com @ e seta. A fonte acima de texto literal continua obrigatória. No código, `Frame` sem `label` (`src/ds/posts/kit.tsx`).
+
 ## 7. Copy final e testes A/B
 
 Toda a copy publicada está em [`src/ds/copy.ts`](../src/ds/copy.ts).
