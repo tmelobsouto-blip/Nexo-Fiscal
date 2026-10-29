@@ -32,7 +32,7 @@ Renders usam `REMOTION_BROWSER` (definido pelo hook de sessão na nuvem; veja `r
 - Texto de lei, súmula e tese é citado literalmente; omissões viram `(...)`; inserções explicativas vão entre colchetes `[ ]`.
 - Dado sem fonte ou ponto jurídico incerto: marque `// VALIDAR:` em `copy.ts` e liste no relatório da tarefa.
 - Modelos com dados fictícios levam `TemplateBadge` até receberem dados reais com linha de fonte.
-- Pendências atuais: status do Tema 1.348 (STF); fonte do “70% dos candidatos” (V01); 272 × 273 questões inéditas.
+- Pendências atuais: status do Tema 1.348 (STF); fonte do “70% dos candidatos” (V01). (273 questões inéditas confirmado pela página de vendas em 29/10/2026.)
 
 ## Regras de marca
 
@@ -56,6 +56,7 @@ Renders usam `REMOTION_BROWSER` (definido pelo hook de sessão na nuvem; veja `r
 - `/grill-me` (chama `grilling`): entrevista para afinar uma ideia antes de produzir.
 - `karpathy-guidelines`: disciplina de código (mudanças cirúrgicas, critérios verificáveis).
 - `/caveman`: modo de resposta comprimida; só quando pedido.
+- `/instagram-carousel`: carrossel em HTML com prévia em moldura do Instagram e export 1080 × 1350 (Playwright, viewport 420 px × fator de escala). Neste projeto, as regras de marca vencem as da skill: cores dos tokens (o “brand gradient” vira verde sólido `#176B49`), Inter + Noto Sans Mono, cantos até 4 px, sem sombra. Gerador em `scripts/ig_carousel/`.
 - Superpowers: plugin oficial (`superpowers@claude-plugins-official`), ativado em `.claude/settings.json`.
 
 Fontes e licenças das skills de terceiros: `.claude/skills/THIRD_PARTY.md`.
