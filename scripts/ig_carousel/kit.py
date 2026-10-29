@@ -57,6 +57,14 @@ def swipe_arrow(light: bool) -> str:
     )
 
 
+def handle(light: bool) -> str:
+    color = MUTED if light else "rgba(255,255,255,0.7)"
+    return (
+        f'<span class="mono" style="position:absolute;left:36px;bottom:18px;z-index:10;font-size:10px;font-weight:500;'
+        f'letter-spacing:0.5px;color:{color};">@nexofiscalbr</span>'
+    )
+
+
 def logo(on_dark: bool) -> str:
     circle = BRAND_DARK if on_dark else BRAND_PRIMARY
     name = WHITE if on_dark else BRAND_DARK

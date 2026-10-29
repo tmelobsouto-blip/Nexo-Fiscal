@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from kit import BRAND_DARK, BRAND_LIGHT, BRAND_PRIMARY, BRAND_SOLID, LIGHT_BG, LIGHT_BORDER, MUTED, ROOT, WHITE, b64, check, logo, page, progress_bar, swipe_arrow  # noqa: E402
+from kit import BRAND_DARK, BRAND_LIGHT, BRAND_PRIMARY, BRAND_SOLID, LIGHT_BG, LIGHT_BORDER, MUTED, ROOT, WHITE, b64, check, handle, page  # noqa: E402
 
 OUT = ROOT / "posts/reta-final-iss/carousel.html"
 TOTAL = 2
@@ -31,26 +31,20 @@ BOOK = f"""<svg width="88" height="117" viewBox="0 0 300 400" style="display:blo
 def slide_hero(proof_uri: str) -> str:
     return f"""
 <div class="slide" style="background:{LIGHT_BG};">
-  <div style="position:absolute;left:36px;right:36px;top:36px;z-index:2;">
-    <div style="display:flex;align-items:center;justify-content:space-between;">
-      {logo(False)}
-      <span class="mono" style="font-size:10px;font-weight:600;letter-spacing:2px;color:{BRAND_PRIMARY};text-transform:uppercase;">ISS Curitiba</span>
-    </div>
-    <h1 class="serif" style="margin:22px 0 0;font-size:29px;font-weight:800;line-height:1.1;letter-spacing:-0.8px;color:{BRAND_DARK};">
+  <div style="position:absolute;left:36px;right:36px;top:40px;z-index:2;">
+    <h1 class="serif" style="margin:0;font-size:33px;font-weight:800;line-height:1.1;letter-spacing:-0.8px;color:{BRAND_DARK};">
       Sua revisão de ISS Curitiba já inclui as <span style="color:{BRAND_PRIMARY};">LCs&nbsp;de&nbsp;2025?</span>
     </h1>
-    <p class="sans" style="margin:12px 0 0;font-size:14px;line-height:1.5;color:{MUTED};">
+    <p class="sans" style="margin:12px 0 0;font-size:15px;line-height:1.5;color:{MUTED};">
       273 questões inéditas, escritas sobre o texto atual da lei. Nada de prova&nbsp;antiga.
     </p>
   </div>
-  <div style="position:absolute;left:36px;right:36px;bottom:52px;z-index:2;">
-    <span class="mono" style="display:block;font-size:10px;font-weight:600;letter-spacing:2px;color:{BRAND_PRIMARY};margin-bottom:8px;">PÁGINA REAL DO MATERIAL</span>
-    <div style="height:176px;border:1px solid {LIGHT_BORDER};border-radius:4px;overflow:hidden;background:{WHITE};">
-      <img src="{proof_uri}" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;">
+  <div style="position:absolute;left:36px;right:36px;bottom:46px;z-index:2;">
+    <div style="border:1px solid {LIGHT_BORDER};border-radius:4px;overflow:hidden;background:{WHITE};">
+      <img src="{proof_uri}" style="width:100%;height:auto;display:block;">
     </div>
   </div>
-  {swipe_arrow(True)}
-  {progress_bar(0, TOTAL, True)}
+  {handle(True)}
 </div>"""
 
 
@@ -70,17 +64,16 @@ def slide_cta() -> str:
     )
     return f"""
 <div class="slide" style="background:{BRAND_SOLID};">
-  <div style="position:absolute;left:36px;right:36px;top:36px;z-index:2;">
-    {logo(True)}
-    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-top:18px;">
-      <h2 class="serif" style="margin:0;font-size:29px;font-weight:800;line-height:1.1;letter-spacing:-0.8px;color:{WHITE};">
+  <div style="position:absolute;left:36px;right:36px;top:40px;z-index:2;">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:16px;">
+      <h2 class="serif" style="margin:0;font-size:31px;font-weight:800;line-height:1.1;letter-spacing:-0.8px;color:{WHITE};">
         Chegou a reta final do <span style="color:{BRAND_LIGHT};">ISS&nbsp;Curitiba.</span>
       </h2>
       {BOOK}
     </div>
     <div style="margin-top:14px;border-top:1px solid rgba(255,255,255,0.16);">{items}</div>
   </div>
-  <div style="position:absolute;left:36px;right:36px;bottom:52px;z-index:2;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;">
+  <div style="position:absolute;left:36px;right:36px;bottom:46px;z-index:2;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;">
     <div>
       <div class="serif" style="font-size:34px;font-weight:900;letter-spacing:-1.2px;line-height:1;color:{WHITE};">R$&nbsp;39,90</div>
       <div class="sans" style="font-size:12px;color:rgba(255,255,255,0.75);margin-top:6px;">Cartão ou Pix à vista</div>
@@ -89,7 +82,7 @@ def slide_cta() -> str:
       Link na bio&nbsp;→
     </div>
   </div>
-  {progress_bar(1, TOTAL, False)}
+  {handle(False)}
 </div>"""
 
 

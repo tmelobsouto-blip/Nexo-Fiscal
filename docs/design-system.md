@@ -183,6 +183,8 @@ Para testar uma linguagem nova sem sair do sistema, monte a mesma peça em dire�
 
 Variante pedida pelo dono do perfil (carrossel [ICMS matriz → filial](roteiros/carrossel-icms-transferencia.md)): sem `TopBar` e sem rótulos auxiliares; só título, conteúdo, ilustração e o rodapé com @ e seta. A fonte acima de texto literal continua obrigatória. No código, `Frame` sem `label` (`src/ds/posts/kit.tsx`).
 
+Desde 29/10/2026 é o padrão de todos os posts de feed, inclusive os feitos com `/instagram-carousel` (`handle()` em `scripts/ig_carousel/kit.py` no lugar da barra de progresso e da seta).
+
 ## 7. Copy final e testes A/B
 
 Toda a copy publicada está em [`src/ds/copy.ts`](../src/ds/copy.ts).

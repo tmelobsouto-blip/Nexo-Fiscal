@@ -10,7 +10,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from kit import BRAND_DARK, BRAND_LIGHT, BRAND_PRIMARY, BRAND_SOLID, LIGHT_BG, LIGHT_BORDER, MUTED, ROOT, WHITE, logo, page, progress_bar, swipe_arrow  # noqa: E402
+from kit import BRAND_DARK, BRAND_LIGHT, BRAND_PRIMARY, BRAND_SOLID, LIGHT_BG, LIGHT_BORDER, MUTED, ROOT, WHITE, handle, page  # noqa: E402
 
 OUT = ROOT / "posts/iss-sorocaba/carousel.html"
 TOTAL = 2
@@ -61,40 +61,35 @@ def slide_hero() -> str:
     )
     return f"""
 <div class="slide" style="background:{LIGHT_BG};">
-  <div style="position:absolute;left:36px;right:36px;top:36px;z-index:2;">
-    <div style="display:flex;align-items:center;justify-content:space-between;">
-      {logo(False)}
-      <span class="mono" style="font-size:10px;font-weight:600;letter-spacing:2px;color:{BRAND_PRIMARY};">ISS SOROCABA · SP</span>
-    </div>
-    <h1 class="serif" style="margin:20px 0 0;font-size:29px;font-weight:800;line-height:1.1;letter-spacing:-0.8px;color:{BRAND_DARK};">
+  <div style="position:absolute;left:36px;right:36px;top:40px;z-index:2;">
+    <h1 class="serif" style="margin:0;font-size:33px;font-weight:800;line-height:1.1;letter-spacing:-0.8px;color:{BRAND_DARK};">
       A <span style="color:{BRAND_PRIMARY};">FCC</span> foi escolhida como banca do ISS&nbsp;Sorocaba.
     </h1>
-    <p class="sans" style="margin:10px 0 0;font-size:14px;line-height:1.5;color:{MUTED};">
+    <p class="sans" style="margin:12px 0 0;font-size:15px;line-height:1.5;color:{MUTED};">
       Homologação em 26/10/2026, registrada no PNCP. Faltam o contrato e o&nbsp;edital.
     </p>
-    <div style="display:flex;align-items:center;gap:20px;margin-top:16px;">
+    <div style="display:flex;align-items:center;gap:20px;margin-top:22px;">
       {DOC}
       <div style="flex:1;border-top:1px solid {LIGHT_BORDER};">{steps}</div>
     </div>
   </div>
-  <div style="position:absolute;left:36px;right:36px;bottom:52px;z-index:2;display:grid;grid-template-columns:0.7fr 1.5fr 0.8fr;gap:8px;">
+  <div style="position:absolute;left:36px;right:36px;bottom:46px;z-index:2;display:grid;grid-template-columns:0.7fr 1.5fr 0.8fr;gap:8px;">
     {stats}
   </div>
-  {swipe_arrow(True)}
-  {progress_bar(0, TOTAL, True)}
+  {handle(True)}
 </div>"""
 
 
 def bar(label: str, parts: list) -> str:
     segs = "".join(
         f'<div style="width:{n / 50 * 100:.2f}%;background:{SUBJECTS[k][1]};display:flex;align-items:center;justify-content:center;'
-        f'font-size:11px;font-weight:800;color:{SUBJECTS[k][2]};">{n}</div>'
+        f'font-size:13px;font-weight:800;color:{SUBJECTS[k][2]};">{n}</div>'
         for k, n in parts
     )
     return (
-        f'<div style="margin-top:10px;"><span class="mono" style="display:block;font-size:10px;font-weight:600;letter-spacing:1px;'
+        f'<div style="margin-top:16px;"><span class="mono" style="display:block;font-size:10px;font-weight:600;letter-spacing:1px;'
         f'text-transform:uppercase;color:rgba(255,255,255,0.75);margin-bottom:4px;">{label}</span>'
-        f'<div style="display:flex;height:22px;gap:2px;border-radius:2px;overflow:hidden;">{segs}</div></div>'
+        f'<div style="display:flex;height:30px;gap:2px;border-radius:2px;overflow:hidden;">{segs}</div></div>'
     )
 
 
@@ -107,28 +102,26 @@ def slide_cta() -> str:
     bars = "".join(bar(label, parts) for label, parts in EXAMS)
     return f"""
 <div class="slide" style="background:{BRAND_SOLID};">
-  <div style="position:absolute;left:36px;right:36px;top:36px;z-index:2;">
-    {logo(True)}
-    <h2 class="serif" style="margin:16px 0 0;font-size:29px;font-weight:800;line-height:1.1;letter-spacing:-0.8px;color:{WHITE};">
+  <div style="position:absolute;left:36px;right:36px;top:40px;z-index:2;">
+    <h2 class="serif" style="margin:0;font-size:31px;font-weight:800;line-height:1.1;letter-spacing:-0.8px;color:{WHITE};">
       Prova objetiva com <span style="color:{BRAND_LIGHT};">50&nbsp;questões.</span>
     </h2>
-    <div style="margin-top:6px;">{bars}</div>
+    <div style="margin-top:14px;">{bars}</div>
     <div style="margin-top:8px;white-space:nowrap;">{legend}</div>
-    <p class="sans" style="margin:10px 0 0;font-size:13px;line-height:1.45;color:{WHITE};font-weight:600;">
+    <p class="sans" style="margin:18px 0 0;font-size:15px;line-height:1.4;color:{WHITE};font-weight:700;">
       Português sobe de 10 para 15. Raciocínio Lógico deixa de ser disciplina&nbsp;própria.
     </p>
-    <p class="sans" style="margin:10px 0 0;font-size:12px;line-height:1.45;color:rgba(255,255,255,0.8);">
+    <p class="sans" style="margin:16px 0 0;font-size:13px;line-height:1.45;color:rgba(255,255,255,0.85);">
       <span class="mono" style="font-size:10px;font-weight:600;letter-spacing:1px;color:{BRAND_LIGHT};">REQUISITOS</span>&nbsp;
       Superior em Ciências Contábeis, Economia, Administração de Empresas ou Direito, e&nbsp;CNH.
     </p>
   </div>
-  <div style="position:absolute;left:36px;right:36px;bottom:52px;z-index:2;">
-    <div style="display:flex;align-items:center;justify-content:center;padding:12px 18px;background:{LIGHT_BG};color:{BRAND_DARK};font-weight:800;font-size:14px;border-radius:4px;">
+  <div style="position:absolute;left:36px;right:36px;bottom:46px;z-index:2;">
+    <div style="display:flex;align-items:center;justify-content:center;padding:13px 18px;background:{LIGHT_BG};color:{BRAND_DARK};font-weight:800;font-size:14px;border-radius:4px;">
       Siga @nexofiscalbr para o edital
     </div>
-    <span class="mono" style="display:block;margin-top:8px;font-size:9px;letter-spacing:1px;color:rgba(255,255,255,0.65);">FONTE: PNCP E TERMO DE REFERÊNCIA · 29/10/2026</span>
   </div>
-  {progress_bar(1, TOTAL, False)}
+  {handle(False)}
 </div>"""
 
 
