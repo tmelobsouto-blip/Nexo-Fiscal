@@ -2,43 +2,12 @@ import React from 'react';
 import { AbsoluteFill } from 'remotion';
 import { SV31, SV31_POST as P } from '../copy';
 import { C, FONT, Mode, tone } from '../tokens';
-import { Canvas, Footer, Label, Law, Mark, TopBar } from '../ui';
+import { CraneTone, Crane, KeyArt, Operator } from '../illustrations';
+import { Label, Law, Mark } from '../ui';
+import { Badge, Big, Block, Box, Chip, Frame, M, Mark2, Mono, W } from './kit';
 
 // Carrossel SV 31 em três direções visuais. Mesmo texto, mesmos tokens; muda a composição.
 type Dir = 'A' | 'B' | 'C';
-const M = 88;
-const W = 1080 - M * 2;
-
-const Big: React.FC<{ size: number; color?: string; style?: React.CSSProperties; children: React.ReactNode }> = ({ size, color, style, children }) => (
-  <div style={{ fontFamily: FONT.sans, fontWeight: 900, fontSize: size, lineHeight: 0.94, letterSpacing: -size * 0.045, color, ...style }}>{children}</div>
-);
-
-const Box: React.FC<{ x: number; y: number; w?: number; h?: number; style?: React.CSSProperties; children?: React.ReactNode }> = ({ x, y, w, h, style, children }) => (
-  <div style={{ position: 'absolute', left: x, top: y, width: w, height: h, boxSizing: 'border-box', ...style }}>{children}</div>
-);
-
-const Chip: React.FC<{ bg: string; fg: string; size: number; children: React.ReactNode }> = ({ bg, fg, size, children }) => (
-  <span style={{ background: bg, color: fg, padding: '0 0.14em', borderRadius: 4, whiteSpace: 'nowrap', fontSize: size }}>{children}</span>
-);
-
-const Mono: React.FC<{ color: string; size?: number; style?: React.CSSProperties; children: React.ReactNode }> = ({ color, size = 21, style, children }) => (
-  <div style={{ fontFamily: FONT.mono, fontWeight: 500, fontSize: size, letterSpacing: size * 0.12, textTransform: 'uppercase', lineHeight: 1.35, color, ...style }}>{children}</div>
-);
-
-/** Frame: TopBar e Footer sempre por cima do fundo; o conteúdo vem posicionado. */
-const Frame: React.FC<{ mode: Mode; label: string; n: number; action: string; bg?: React.ReactNode; children: React.ReactNode }> = ({ mode, label, n, action, bg, children }) => (
-  <Canvas mode={mode}>
-    {bg}
-    <div style={{ position: 'relative' }}>
-      <TopBar label={label} index={n} total={P.total} />
-    </div>
-    <div style={{ flex: 1 }} />
-    <div style={{ position: 'relative' }}>
-      <Footer action={action} />
-    </div>
-    {children}
-  </Canvas>
-);
 
 const LawText: React.FC = () => (
   <>
@@ -102,107 +71,12 @@ const Pages: React.FC<{ x: number; y: number; scale?: number; line?: string }> =
   );
 };
 
-type CraneTone = { body: string; boom: string; dark: string; glass: string; operator?: boolean };
-
-/** Guindaste sobre caminhão, em blocos planos. `operator` põe alguém na cabine. */
-const Crane: React.FC<{ width: number; t: CraneTone; ground?: boolean }> = ({ width, t, ground }) => (
-  <svg width={width} height={(width * 360) / 520} viewBox="0 0 520 360" style={{ display: 'block', overflow: 'visible' }}>
-    {ground ? <rect x={-30} y={331} width={580} height={5} fill={t.dark} /> : null}
-    {[70, 430].map((x) => (
-      <g key={x}>
-        <rect x={x} y={272} width={14} height={52} fill={t.dark} />
-        <rect x={x - 14} y={320} width={42} height={11} fill={t.dark} />
-      </g>
-    ))}
-    <rect x={40} y={232} width={440} height={44} fill={t.body} />
-    <rect x={40} y={270} width={440} height={10} fill={t.dark} />
-    <rect x={470} y={250} width={18} height={26} fill={t.dark} />
-    <rect x={376} y={156} width={104} height={78} fill={t.body} />
-    <rect x={372} y={150} width={112} height={10} fill={t.dark} />
-    <rect x={418} y={138} width={22} height={12} fill={C.alertSoft} />
-    <polygon points="392,170 462,170 470,212 392,212" fill={t.glass} />
-    {t.operator ? (
-      <g>
-        <rect x={416} y={198} width={28} height={14} fill={C.green} />
-        <circle cx={430} cy={188} r={11} fill={C.surface} />
-        <path d="M417 186 a13 13 0 0 1 26 0 Z" fill={C.white} />
-        <rect x={414} y={184} width={32} height={4} fill={C.white} />
-      </g>
-    ) : null}
-    <rect x={392} y={216} width={3} height={18} fill={t.dark} />
-    <rect x={484} y={178} width={7} height={26} fill={t.dark} />
-    <rect x={96} y={188} width={30} height={44} fill={t.dark} />
-    <rect x={118} y={196} width={116} height={36} fill={t.body} />
-    <rect x={118} y={224} width={116} height={6} fill={t.dark} fillOpacity={0.3} />
-    <g transform="translate(176 208) rotate(-32)">
-      <rect x={0} y={-16} width={230} height={32} fill={t.boom} />
-      <rect x={226} y={-12} width={158} height={24} fill={t.boom} />
-      <rect x={226} y={-16} width={4} height={32} fill={t.dark} fillOpacity={0.5} />
-      {[30, 80, 130, 180, 250, 300, 350].map((x) => (
-        <path key={x} d={`M${x} -12 l22 24`} stroke={t.dark} strokeOpacity={0.35} strokeWidth={4} />
-      ))}
-    </g>
-    <circle cx={176} cy={208} r={10} fill={t.dark} />
-    <line x1={494} y1={8} x2={494} y2={118} stroke={t.dark} strokeWidth={4} />
-    <rect x={483} y={116} width={22} height={22} fill={t.dark} />
-    <path d="M494 138 v12 a9 9 0 1 1 -9 9" fill="none" stroke={t.dark} strokeWidth={5} />
-    {[96, 168, 360, 432].map((cx) => (
-      <g key={cx}>
-        <circle cx={cx} cy={300} r={30} fill={t.dark} />
-        <circle cx={cx} cy={300} r={13} fill={t.glass} />
-        <circle cx={cx} cy={300} r={4} fill={t.dark} />
-      </g>
-    ))}
-  </svg>
-);
-
-/** Operador de pé, com capacete, colete e controle remoto. */
-const Operator: React.FC<{ height: number }> = ({ height }) => (
-  <svg width={(height * 120) / 260} height={height} viewBox="0 0 120 260" style={{ display: 'block', overflow: 'visible' }}>
-    <rect x={36} y={172} width={20} height={74} fill={C.ink} />
-    <rect x={64} y={172} width={20} height={74} fill={C.ink} />
-    <rect x={30} y={240} width={28} height={12} fill={C.ink} />
-    <rect x={62} y={240} width={28} height={12} fill={C.ink} />
-    <rect x={30} y={92} width={60} height={88} fill={C.green} />
-    <rect x={34} y={96} width={52} height={80} fill={C.mint} />
-    <rect x={34} y={140} width={52} height={7} fill={C.white} />
-    <rect x={56} y={96} width={8} height={80} fill={C.green} />
-    <rect x={14} y={98} width={18} height={62} fill={C.green} />
-    <rect x={88} y={98} width={18} height={44} fill={C.green} />
-    <rect x={86} y={128} width={30} height={20} fill={C.ink} />
-    <rect x={108} y={112} width={3} height={16} fill={C.ink} />
-    <circle cx={60} cy={62} r={24} fill={C.surface} />
-    <circle cx={52} cy={64} r={3} fill={C.ink} />
-    <circle cx={68} cy={64} r={3} fill={C.ink} />
-    <path d="M34 56 a26 26 0 0 1 52 0 Z" fill={C.white} />
-    <rect x={30} y={53} width={60} height={6} fill={C.white} />
-  </svg>
-);
-
-/** Chave com etiqueta: entregar o bem (obrigação de dar). */
-const KeyArt: React.FC<{ width: number; color: string; tag: string }> = ({ width, color, tag }) => (
-  <svg width={width} height={(width * 120) / 220} viewBox="0 0 220 120" style={{ display: 'block' }}>
-    <circle cx={52} cy={60} r={30} fill="none" stroke={color} strokeWidth={14} />
-    <rect x={80} y={53} width={112} height={14} fill={color} />
-    <rect x={160} y={67} width={12} height={22} fill={color} />
-    <rect x={180} y={67} width={12} height={30} fill={color} />
-    <line x1={40} y1={36} x2={28} y2={8} stroke={color} strokeWidth={3} />
-    <rect x={8} y={0} width={30} height={20} fill={tag} transform="rotate(-18 23 10)" />
-  </svg>
-);
-
-const Mark2: React.FC<{ kind: 'yes' | 'no'; color: string; size?: number }> = ({ kind, color, size = 64 }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth={2.6} strokeLinecap="square">
-    {kind === 'yes' ? <path d="M5 12.5l4.5 4.5L19 7.5" /> : <path d="M6 6l12 12M18 6L6 18" />}
-  </svg>
-);
-
 // ---------------------------------------------------------------- A · Noir técnico
 
 const A1: React.FC = () => {
   const x = P.cover;
   return (
-    <Frame mode="dark" label={x.label} n={1} action={x.action} bg={<Rings cx={790} cy={500} radii={[120, 190, 260, 330, 400, 470, 540]} hot={2} />}>
+    <Frame total={P.total} mode="dark" label={x.label} n={1} action={x.action} bg={<Rings cx={790} cy={500} radii={[120, 190, 260, 330, 400, 470, 540]} hot={2} />}>
       <Box x={M} y={196}>
         <span style={{ display: 'inline-block', border: `2px solid ${C.mint}`, borderRadius: 4, padding: '10px 16px' }}>
           <Mono color={C.mint}>{x.tag}</Mono>
@@ -232,7 +106,7 @@ const A1: React.FC = () => {
 };
 
 const A2: React.FC = () => (
-  <Frame mode="dark" label={P.law.label} n={2} action={P.law.action} bg={<Rings cx={960} cy={1010} radii={[70, 130, 190]} hot={1} />}>
+  <Frame total={P.total} mode="dark" label={P.law.label} n={2} action={P.law.action} bg={<Rings cx={960} cy={1010} radii={[70, 130, 190]} hot={1} />}>
     <Box x={M} y={236} w={W}>
       <Law source={P.law.source} size={46}>
         <LawText />
@@ -281,7 +155,7 @@ const A3: React.FC = () => {
     );
   };
   return (
-    <Frame mode="dark" label={x.label} n={3} action={x.action} bg={<Rings cx={540} cy={370} radii={[170, 250, 330, 410]} opacity={0.8} />}>
+    <Frame total={P.total} mode="dark" label={x.label} n={3} action={x.action} bg={<Rings cx={540} cy={370} radii={[170, 250, 330, 410]} opacity={0.8} />}>
       <Branch from={[400, 500]} to={[304, 790]} color={C.mint} />
       <Branch from={[680, 500]} to={[776, 790]} color={C.alertSoft} />
       <Box x={M} y={250} w={W} style={{ background: C.ink, border: `2px solid ${C.lineDark}`, borderRadius: 4, padding: '34px 40px', textAlign: 'center' }}>
@@ -295,18 +169,10 @@ const A3: React.FC = () => {
   );
 };
 
-const Badge: React.FC<{ x: number; y: number; bg: string; fg: string; children: React.ReactNode }> = ({ x, y, bg, fg, children }) => (
-  <Box x={x} y={y} style={{ background: bg, borderRadius: 4, padding: '12px 18px' }}>
-    <Mono color={fg} size={22}>
-      {children}
-    </Mono>
-  </Box>
-);
-
 const A4: React.FC = () => {
   const x = P.material;
   return (
-    <Frame mode="dark" label={x.label} n={4} action={x.action} bg={<Rings cx={540} cy={840} radii={[210, 290, 370, 450]} hot={1} />}>
+    <Frame total={P.total} mode="dark" label={x.label} n={4} action={x.action} bg={<Rings cx={540} cy={840} radii={[210, 290, 370, 450]} hot={1} />}>
       <Box x={M} y={204} w={W}>
         <Big size={86} color={C.white}>
           {x.a}
@@ -331,16 +197,10 @@ const A4: React.FC = () => {
 
 // ---------------------------------------------------------------- B · Blocos de cor
 
-const Block: React.FC<{ x: number; y: number; w: number; h: number; bg?: string; style?: React.CSSProperties; children?: React.ReactNode }> = ({ x, y, w, h, bg = C.green, style, children }) => (
-  <Box x={x} y={y} w={w} h={h} style={{ background: bg, borderRadius: 4, overflow: 'hidden', ...style }}>
-    {children}
-  </Box>
-);
-
 const B1: React.FC = () => {
   const x = P.cover;
   return (
-    <Frame mode="light" label={x.label} n={1} action={x.action}>
+    <Frame total={P.total} mode="light" label={x.label} n={1} action={x.action}>
       <Box x={M} y={196}>
         <span style={{ display: 'inline-block', border: `2px solid ${C.green}`, borderRadius: 4, padding: '10px 16px' }}>
           <Mono color={C.green}>{x.tag}</Mono>
@@ -370,7 +230,7 @@ const B1: React.FC = () => {
 };
 
 const B2: React.FC = () => (
-  <Frame mode="light" label={P.law.label} n={2} action={P.law.action}>
+  <Frame total={P.total} mode="light" label={P.law.label} n={2} action={P.law.action}>
     <Block x={M} y={196} w={W} h={430} bg={C.white} style={{ border: `2px solid ${C.line}`, padding: '46px 48px' }}>
       <Law source={P.law.source} size={44}>
         <LawText />
@@ -420,7 +280,7 @@ const B3: React.FC = () => {
     );
   };
   return (
-    <Frame mode="light" label={x.label} n={3} action={x.action}>
+    <Frame total={P.total} mode="light" label={x.label} n={3} action={x.action}>
       <Block x={M} y={196} w={W} h={300} style={{ padding: '40px 48px' }}>
         <Mono color={C.mint}>{x.kicker}</Mono>
         <div style={{ fontFamily: FONT.sans, fontWeight: 900, fontSize: 56, letterSpacing: -2.2, color: C.white, marginTop: 16, lineHeight: 1 }}>{x.title}</div>
@@ -440,7 +300,7 @@ const B3: React.FC = () => {
 const B4: React.FC = () => {
   const x = P.material;
   return (
-    <Frame mode="dark" label={x.label} n={4} action={x.action}>
+    <Frame total={P.total} mode="dark" label={x.label} n={4} action={x.action}>
       <Box x={M} y={196} w={W}>
         <Big size={84} color={C.white}>
           {x.a}
@@ -473,7 +333,7 @@ const CRANE_LIGHT: CraneTone = { body: C.paper, boom: C.white, dark: C.ink, glas
 const C1: React.FC = () => {
   const x = P.cover;
   return (
-    <Frame mode="dark" label={x.label} n={1} action={x.action}>
+    <Frame total={P.total} mode="dark" label={x.label} n={1} action={x.action}>
       <Block x={M} y={190} w={W} h={996} bg={C.mint} style={{ overflow: 'visible' }}>
         <Box x={56} y={56}>
           <span style={{ display: 'inline-block', background: C.ink, borderRadius: 4, padding: '10px 16px' }}>
@@ -503,7 +363,7 @@ const C1: React.FC = () => {
 };
 
 const C2: React.FC = () => (
-  <Frame mode="dark" label={P.law.label} n={2} action={P.law.action}>
+  <Frame total={P.total} mode="dark" label={P.law.label} n={2} action={P.law.action}>
     <Box x={M} y={210} w={W}>
       <Law source={P.law.source} size={40}>
         <LawText />
@@ -586,7 +446,7 @@ const C3: React.FC = () => {
     );
   };
   return (
-    <Frame mode="dark" label={x.label} n={3} action={x.action}>
+    <Frame total={P.total} mode="dark" label={x.label} n={3} action={x.action}>
       <Box x={M} y={196} w={W}>
         <Mono color={C.mint}>{x.kicker}</Mono>
         <div style={{ fontFamily: FONT.sans, fontWeight: 900, fontSize: 56, letterSpacing: -2.2, color: C.white, marginTop: 14, lineHeight: 1 }}>{x.title}</div>
@@ -604,7 +464,7 @@ const C3: React.FC = () => {
 const C4: React.FC = () => {
   const x = P.material;
   return (
-    <Frame mode="dark" label={x.label} n={4} action={x.action}>
+    <Frame total={P.total} mode="dark" label={x.label} n={4} action={x.action}>
       <Block x={M} y={190} w={W} h={996} bg={C.mint} style={{ overflow: 'visible' }}>
         <Box x={56} y={56} w={W - 112}>
           <Big size={84} color={C.ink}>
