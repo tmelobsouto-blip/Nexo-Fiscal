@@ -4,6 +4,7 @@ Sistema visual e templates de Instagram da **NEXO Fiscal**, marca de preparaçã
 
 Tudo aqui é editável: as artes são componentes [Remotion](https://www.remotion.dev/) (React + TypeScript). Os PNGs e MP4s prontos ficam em `exports/`.
 
+- **Padrão atual (v2 Neon Editorial):** [`docs/padrao-neon-editorial.md`](docs/padrao-neon-editorial.md)
 - **Documentação do sistema visual:** [`docs/design-system.md`](docs/design-system.md)
 - **Relatório visual** (galerias e vídeos): [`docs/report/index.html`](docs/report/index.html)
 - **Arquivos prontos para publicar:** [`exports/`](exports/)
